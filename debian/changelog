@@ -1,0 +1,5 @@
+rocm-hipify-clang (6.2.4-1) unstable; urgency=medium
+
+  * Initial release.
+
+ -- CHEN Xuan <chenxuan@iscas.ac.cn>  Fri, 24 Jan 2025 14:24:35 +0800

@@ -1,0 +1,44 @@
+Source: rocm-hipify-clang
+Section: devel
+Priority: optional
+Maintainer: CHEN Xuan <chenxuan@iscas.ac.cn>
+Rules-Requires-Root: no
+Build-Depends:
+ debhelper-compat (= 13),
+ cmake,
+ rocm-env,
+# rocm-llvm, (wait to be done)
+ rocm-smi-lib,
+ rocm-hip-on-rocclr-dev,
+Standards-Version: 4.7.0
+Homepage: https://github.com/ROCm/HIPIFY
+Vcs-Browser: https://github.com/r-rocm/rocm-hipify-clang
+Vcs-Git: https://github.com/r-rocm/rocm-hipify-clang.git
+
+Package: rocm-hipify-clang
+Architecture: any
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description: HIPIFY: Convert CUDA to Portable C++ Code.
+ HIPIFY is a set of tools that you can use to automatically translate CUDA
+ source code into portable HIP C++.
+
+Package: rocm-hipify-clang-dev
+Architecture: any
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description: HIPIFY: Convert CUDA to Portable C++ Code. Development files。
+ HIPIFY is a set of tools that you can use to automatically translate CUDA
+ source code into portable HIP C++.
+
+Package: rocm-hipify-clang-doc
+Architecture: all
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description: HIPIFY: Convert CUDA to Portable C++ Code . Doc files。
+ HIPIFY is a set of tools that you can use to automatically translate CUDA
+ source code into portable HIP C++.
+

@@ -1,0 +1,3 @@
+opt/rocm-@ROCM_VERSION@/bin
+opt/rocm-@ROCM_VERSION@/lib/.hipInfo
+opt/rocm-@ROCM_VERSION@/lib/lib*
