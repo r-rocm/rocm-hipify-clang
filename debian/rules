@@ -12,7 +12,7 @@ MAKEOPTS="-j$$(($$(nproc) / 2))"
 TOP_DIR := $(shell pwd)
 SRC_PATH := $(TOP_DIR)
 BUILD_PATH := $(TOP_DIR)/build-rocm
-DEB_INST_DIR := $(TOP_DIR)/debian/tmp
+DEB_INST_DIR := $(TOP_DIR)/debian/$(PKG_NAME)
 
 REVYOS_ROCM_CMAKE_PARAMS := -S $(SRC_PATH) -B $(BUILD_PATH)
 REVYOS_ROCM_CMAKE_PARAMS += -DCMAKE_INSTALL_PREFIX=$(ROCM_PATH)
@@ -20,9 +20,6 @@ REVYOS_ROCM_CMAKE_PARAMS += -DCMAKE_BUILD_TYPE=Release
 REVYOS_ROCM_CMAKE_PARAMS += -DCMAKE_C_COMPILER=$(ROCM_PATH)/bin/clang
 REVYOS_ROCM_CMAKE_PARAMS += -DCMAKE_CXX_COMPILER=$(ROCM_PATH)/bin/clang++
 REVYOS_ROCM_CMAKE_PARAMS += -DCMAKE_VERBOSE_MAKEFILE=TRUE	
-
-
-
 
 %:
 	dh $@
@@ -39,6 +36,4 @@ override_dh_auto_install:
 	DESTDIR=$(DEB_INST_DIR)/ cmake --build $(BUILD_PATH) -- $(MAKEOPTS) install
 
 override_dh_install:
-	exit 999
-	sed -i "s,@ROCM_VERSION@,${ROCM_VERSION},g" debian/*.install
-	dh_install
+	echo "dh_install skipped"

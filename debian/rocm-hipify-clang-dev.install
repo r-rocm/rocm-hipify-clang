@@ -1,2 +1,0 @@
-opt/rocm-@ROCM_VERSION@/lib/cmake
-opt/rocm-@ROCM_VERSION@/include

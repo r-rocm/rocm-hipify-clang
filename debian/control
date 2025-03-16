@@ -20,25 +20,8 @@ Architecture: any
 Depends:
  ${shlibs:Depends},
  ${misc:Depends},
+ rocm-hip-on-rocclr,
+ rocm-smi-lib,
 Description: HIPIFY: Convert CUDA to Portable C++ Code.
  HIPIFY is a set of tools that you can use to automatically translate CUDA
  source code into portable HIP C++.
-
-Package: rocm-hipify-clang-dev
-Architecture: any
-Depends:
- ${shlibs:Depends},
- ${misc:Depends},
-Description: HIPIFY: Convert CUDA to Portable C++ Code. Development files。
- HIPIFY is a set of tools that you can use to automatically translate CUDA
- source code into portable HIP C++.
-
-Package: rocm-hipify-clang-doc
-Architecture: all
-Depends:
- ${shlibs:Depends},
- ${misc:Depends},
-Description: HIPIFY: Convert CUDA to Portable C++ Code . Doc files。
- HIPIFY is a set of tools that you can use to automatically translate CUDA
- source code into portable HIP C++.
-
