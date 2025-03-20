@@ -37,4 +37,5 @@ override_dh_auto_install:
 
 override_dh_install:
 	sed -i "s,@ROCM_VERSION@,${ROCM_VERSION},g" debian/*.install
+	chmod +x $(DEB_INST_DIR)/$(ROCM_PATH)/bin/hipify-perl
 	dh_install
