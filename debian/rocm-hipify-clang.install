@@ -1,0 +1,2 @@
+opt/rocm-@ROCM_VERSION@/bin
+opt/rocm-@ROCM_VERSION@/libexec

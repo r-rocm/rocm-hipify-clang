@@ -1,3 +1,10 @@
+rocm-hipify-clang (6.2.4-2) unstable; urgency=medium
+
+  * Add dependencies.
+  * Split Package. 
+
+ -- CHEN Xuan <chenxuan@iscas.ac.cn>  Thu, 20 Mar 2025 17:13:45 +0800
+
 rocm-hipify-clang (6.2.4-1) unstable; urgency=medium
 
   * Initial release.
