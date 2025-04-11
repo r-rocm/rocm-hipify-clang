@@ -1,3 +1,9 @@
+rocm-hipify-clang (6.2.4-3) unstable; urgency=medium
+
+  * Rebuild for fix of CLR HIP_PATH fix
+
+ --  <chenxuan@iscas.ac.cn>  Fri, 11 Apr 2025 08:15:27 +0800
+
 rocm-hipify-clang (6.2.4-2) unstable; urgency=medium
 
   * Add dependencies.
