@@ -12,7 +12,7 @@ Build-Depends:
  rocm-core,
  rocm-env,
  rocm-llvm,
- rocm-smi-lib,
+ rocm-smi-lib-dev,
  rocm-hip-on-rocclr-dev,
  terminfo,
  zlib1g-dev,
