@@ -18,8 +18,8 @@ Build-Depends:
  zlib1g-dev,
 Standards-Version: 4.7.0
 Homepage: https://github.com/ROCm/HIPIFY
-Vcs-Browser: https://github.com/r-rocm/rocm-hipify-clang
-Vcs-Git: https://github.com/r-rocm/rocm-hipify-clang.git
+Vcs-Browser: https://github.com/revyos-rocm/rocm-hipify-clang
+Vcs-Git: https://github.com/revyos-rocm/rocm-hipify-clang.git
 
 Package: rocm-hipify-clang
 Architecture: any
