@@ -9,6 +9,10 @@ option(HIPIFY_CLANG_TESTS_ONLY "Build HIPIFY tests only, if lit is installed and
 option(HIPIFY_INCLUDE_IN_HIP_SDK "Include HIPIFY in HIP SDK" OFF)
 option(HIPIFY_INSTALL_CLANG_HEADERS "Include clang headers in HIPIFY installation" ON)
 
+if(NOT WIN32)
+  set(CPACK_SET_DESTDIR ON CACHE BOOL "Installer package will install hipify to CMAKE_INSTALL_PREFIX instead of CPACK_PACKAGING_INSTALL_PREFIX")
+endif()
+
 if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
   set(HIPIFY_TEST "ON")
 else()
@@ -180,12 +184,18 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
     PATTERN "hipify-perl"
     PATTERN "*.sh"
     PATTERN "findcode.sh" EXCLUDE
+    PATTERN "findcode_headers.sh" EXCLUDE
+    PATTERN "findcode_sources.sh" EXCLUDE
+    PATTERN "findcode_custom.sh" EXCLUDE
     PATTERN "finduncodep.sh" EXCLUDE)
 
   set(HIPIFY_LIBEXEC_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBEXECDIR}/hipify")
 
   install(
     PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode.sh
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode_headers.sh
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode_sources.sh
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode_custom.sh
     PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/finduncodep.sh
     DESTINATION ${CMAKE_INSTALL_LIBEXECDIR}/hipify)
 
@@ -262,9 +272,9 @@ if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
   set (HIPIFY_CLANG_RES "${LLVM_LIBRARY_DIRS}/clang/${LIB_CLANG_RES}")
 
   if(${CMAKE_VERSION} VERSION_LESS "3.27.0")
-    find_package(PythonInterp 2.7 REQUIRED)
+    find_package(PythonInterp 3.0 REQUIRED)
   else()
-    find_package(Python 2.7...3.13 REQUIRED)
+    find_package(Python 3.0...3.14 REQUIRED)
   endif()
 
   function (require_program PROGRAM_NAME)
@@ -282,6 +292,7 @@ if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
   set(CUDA_TOOLKIT_ROOT_DIR "" CACHE PATH "Path to CUDA Toolkit to use in hipify-clang unit testing")
   set(CUDA_SDK_ROOT_DIR     "" CACHE PATH "Path to CUDA Toolkit Samples")
   set(CUDA_DNN_ROOT_DIR     "" CACHE PATH "Path to cuDNN")
+  set(CUDA_TENSOR_ROOT_DIR  "" CACHE PATH "Path to cuTENSOR")
   set(CUDA_CUB_ROOT_DIR     "" CACHE PATH "Path to CUB")
 
   if(NOT CUDA_TOOLKIT_ROOT_DIR STREQUAL "" AND NOT CUDA_TOOLKIT_ROOT_DIR MATCHES "OFF")
@@ -298,6 +309,7 @@ if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
   message(STATUS "   - CUDA Toolkit path     : ${CUDA_TOOLKIT_ROOT_DIR}")
   message(STATUS "   - CUDA Samples path     : ${CUDA_SDK_ROOT_DIR}")
   message(STATUS "   - cuDNN path            : ${CUDA_DNN_ROOT_DIR}")
+  message(STATUS "   - cuTENSOR path         : ${CUDA_TENSOR_ROOT_DIR}")
   message(STATUS "   - CUB path              : ${CUDA_CUB_ROOT_DIR}")
 
   if(${CMAKE_VERSION} VERSION_LESS "3.27.0")
@@ -336,6 +348,10 @@ if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
     set(CUDA_DNN_ROOT_DIR OFF)
   endif()
 
+  if(CUDA_TENSOR_ROOT_DIR STREQUAL "")
+    set(CUDA_TENSOR_ROOT_DIR OFF)
+  endif()
+
   if(CUDA_CUB_ROOT_DIR STREQUAL "")
     if(CUDA_VERSION VERSION_GREATER_EQUAL "11.0")
       if(WIN32 OR (UNIX AND CUDA_VERSION VERSION_LESS "11.4" OR CUDA_VERSION VERSION_GREATER_EQUAL "11.6"))
@@ -352,6 +368,7 @@ if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
   message(STATUS "   - CUDA Toolkit path     : ${CUDA_TOOLKIT_ROOT_DIR}")
   message(STATUS "   - CUDA Samples path     : ${CUDA_SDK_ROOT_DIR}")
   message(STATUS "   - cuDNN path            : ${CUDA_DNN_ROOT_DIR}")
+  message(STATUS "   - cuTENSOR path         : ${CUDA_TENSOR_ROOT_DIR}")
   message(STATUS "   - CUB path              : ${CUDA_CUB_ROOT_DIR}")
 
   if((CUDA_VERSION VERSION_LESS "7.0") OR (LLVM_PACKAGE_VERSION VERSION_LESS "3.8") OR

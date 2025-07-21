@@ -87,6 +87,11 @@ namespace doc {
   const string sRAND = "CURAND_API_supported_by_HIP";
   const string sRAND_md = sRAND + md_ext;
   const string sRAND_csv = sRAND + csv_ext;
+  const string sRAND_and_ROC_md = sRAND + sandROC + md_ext;
+  const string sRAND_and_ROC_csv = sRAND + sandROC + csv_ext;
+  const string sROCRAND = "CURAND_API_supported_by_ROC";
+  const string sROCRAND_md = sROCRAND + md_ext;
+  const string sROCRAND_csv = sROCRAND + csv_ext;
   const string sCURAND = "CURAND";
 
   const string sandMIOPEN = "_and_MIOPEN";
@@ -129,6 +134,11 @@ namespace doc {
   const string sCUB_md = sCUB + md_ext;
   const string sCUB_csv = sCUB + csv_ext;
   const string sCUCUB = "CUB";
+
+  const string sTENSOR = "CUTENSOR_API_supported_by_HIP";
+  const string sTENSOR_md = sTENSOR + md_ext;
+  const string sTENSOR_csv = sTENSOR + csv_ext;
+  const string sCUTENSOR = "CUTENSOR";
 
   const string sAPI_supported_by = "API supported by ";
   const string sCUDA = "CUDA";
@@ -240,6 +250,8 @@ namespace doc {
         for (auto doc : docs) {
           if (doc != (types & doc)) continue;
           *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported_by << (isJoint() ? getJointAPI() : getAPI()) << endl << endl;
+          *streams[doc].get() << endl << "**Note\\:** In the tables that follow the columns marked " << (format == full ? "`A`, `D`, `C`, `R`, and `E`" : "`D` and `E`") << " mean the following:";
+          *streams[doc].get() << endl << (format == full ? "**A** - Added; **D** - Deprecated; **C** - Changed; **R** - Removed; **E** - Experimental" : "**D** - Deprecated; **E** - Experimental") << endl << endl;
           unsigned int compact_only_cur_sec_num = 1;
           for (auto &s : getSections()) {
             const functionMap &ftMap = isTypeSection(s.first, getSections()) ? getTypes() : getFunctions();
@@ -413,7 +425,6 @@ namespace doc {
               *streams[doc].get() << rows.str() << endl;
             }
           }
-          *streams[doc].get() << endl << (doc == md ? "\\" : "") << (format == full ? "*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental" : "*D - Deprecated; E - Experimental");
         }
         return true;
       }
@@ -636,7 +647,7 @@ namespace doc {
 
   class RAND: public DOC {
     public:
-      RAND(const string &outDir): DOC(outDir) {}
+      RAND(const string &outDir): DOC(outDir) { hasROC = true; }
       virtual ~RAND() {}
     protected:
       const sectionMap &getSections() const override { return CUDA_RAND_API_SECTION_MAP; }
@@ -648,12 +659,28 @@ namespace doc {
       const hipVersionMap &getHipTypeVersions() const override { return HIP_RAND_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCURAND; }
       const string &getFileName(docType format) const override {
-        switch (format) {
+          switch (format) {
           case none:
           default: return sEmpty;
-          case md: return sRAND_md;
-          case csv: return sRAND_csv;
-        }
+          case md: return roc == joint ? sRAND_and_ROC_md : sRAND_md;
+          case csv: return roc == joint ? sRAND_and_ROC_csv : sRAND_csv;
+          }
+      }
+  };
+
+  class ROCRAND : public RAND {
+  public:
+      ROCRAND(const string& outDir) : RAND(outDir) { hasROC = false; isROC = true; }
+      virtual ~ROCRAND() {}
+  protected:
+      const string& getAPI() const override { return sROC; }
+      const string& getFileName(docType format) const override {
+          switch (format) {
+          case none:
+          default: return sEmpty;
+          case md: return sROCRAND_md;
+          case csv: return sROCRAND_csv;
+          }
       }
   };
 
@@ -774,6 +801,7 @@ namespace doc {
       const typeMap &getTypes() const override { return CUDA_DEVICE_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_DEVICE_FUNCTION_VER_MAP; }
       const hipVersionMap &getHipFunctionVersions() const override { return HIP_DEVICE_FUNCTION_VER_MAP; }
+      const cudaChangedVersionMap &getCudaChangedFunctionVersions() const override { return CUDA_DEVICE_FUNCTION_CHANGED_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_DEVICE_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_DEVICE_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUDEVICE; }
@@ -834,6 +862,29 @@ namespace doc {
       }
   };
 
+   class TENSOR : public DOC {
+    public:
+      TENSOR(const string &outDir): DOC(outDir) {}
+      virtual ~TENSOR() {}
+    protected:
+      const sectionMap &getSections() const override { return CUDA_TENSOR_API_SECTION_MAP; }
+      const functionMap &getFunctions() const override { return CUDA_TENSOR_FUNCTION_MAP; }
+      const typeMap &getTypes() const override { return CUDA_TENSOR_TYPE_NAME_MAP; }
+      const versionMap &getFunctionVersions() const override { return CUDA_TENSOR_FUNCTION_VER_MAP; }
+      const hipVersionMap &getHipFunctionVersions() const override { return HIP_TENSOR_FUNCTION_VER_MAP; }
+      const versionMap &getTypeVersions() const override { return CUDA_TENSOR_TYPE_NAME_VER_MAP; }
+      const hipVersionMap &getHipTypeVersions() const override { return HIP_TENSOR_TYPE_NAME_VER_MAP; }
+      const string &getName() const override { return sCUTENSOR; }
+      const string &getFileName(docType format) const override {
+        switch (format) {
+          case none:
+          default: return sEmpty;
+          case md: return sTENSOR_md;
+          case csv: return sTENSOR_csv;
+        }
+      }
+  };
+
   bool generate(bool GenerateMD, bool GenerateCSV) {
     if (!GenerateMD && !GenerateCSV) return true;
     error_code EC;
@@ -878,14 +929,16 @@ namespace doc {
     ROCSOLVER rocsolver(sOut);
     MIOPEN miopen(sOut);
     ROCSPARSE rocsparse(sOut);
+    RAND rand(sOut);
+    docs.addDoc(&rand);
+    ROCRAND rocrand(sOut);
     if (docRoc == separate) {
       docs.addDoc(&rocblas);
+      docs.addDoc(&rocrand);
       docs.addDoc(&miopen);
       docs.addDoc(&rocsparse);
       docs.addDoc(&rocsolver);
     }
-    RAND rand(sOut);
-    docs.addDoc(&rand);
     DNN dnn(sOut);
     docs.addDoc(&dnn);
     FFT fft(sOut);
@@ -898,6 +951,8 @@ namespace doc {
     docs.addDoc(&rtc);
     CUB cub(sOut);
     docs.addDoc(&cub);
+    TENSOR tensor(sOut);
+    docs.addDoc(&tensor);
     return docs.generate();
   }
 
