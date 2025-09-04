@@ -26,8 +26,6 @@ Architecture: any
 Depends:
  ${shlibs:Depends},
  ${misc:Depends},
- rocm-hip-on-rocclr,
- rocm-smi-lib,
  rocm-core,
  rocm-env,
 Description: HIPIFY: Convert CUDA to Portable C++ Code. Binary package.
