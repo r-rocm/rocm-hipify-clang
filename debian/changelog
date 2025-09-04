@@ -1,3 +1,9 @@
+rocm-hipify-clang (6.4.3-1) trixie; urgency=medium
+
+  * Release 6.4.3-1
+
+ -- CHEN Xuan <chenxuan@iscas.ac.cn>  Thu, 04 Sep 2025 19:01:17 +0800
+
 rocm-hipify-clang (6.4.2-1) trixie; urgency=medium
 
   * Release 6.4.2-1
