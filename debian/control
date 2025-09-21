@@ -10,8 +10,8 @@ Build-Depends:
  libxml2-dev,
  libzstd-dev,
  rocm-core,
- rocm-env,
- rocm-llvm,
+ rocm-env (>= 7.0.0),
+ rocm-llvm (>= 7.0.0),
  rocm-smi-lib-dev,
  rocm-hip-on-rocclr-dev,
  terminfo,
@@ -27,7 +27,7 @@ Depends:
  ${shlibs:Depends},
  ${misc:Depends},
  rocm-core,
- rocm-env,
+ rocm-env (>= 7.0.0),
 Description: HIPIFY: Convert CUDA to Portable C++ Code. Binary package.
  HIPIFY is a set of tools that you can use to automatically translate CUDA
  source code into portable HIP C++.
