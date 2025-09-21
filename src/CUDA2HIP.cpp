@@ -34,6 +34,7 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   {"driver_types.h",                                        {"hip/driver_types.h",                                    "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"cuda_fp16.h",                                           {"hip/hip_fp16.h",                                        "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"cuda_fp8.h",                                            {"hip/hip_fp8.h",                                         "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
+  {"cuda_fp4.h",                                            {"hip/hip_fp4.h",                                         "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"cuda_texture_types.h",                                  {"hip/hip_texture_types.h",                               "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"texture_fetch_functions.h",                             {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"vector_types.h",                                        {"hip/hip_vector_types.h",                                "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
@@ -41,6 +42,9 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   {"cooperative_groups.h",                                  {"hip/hip_cooperative_groups.h",                          "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"library_types.h",                                       {"hip/library_types.h",                                   "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"math_constants.h",                                      {"hip/hip_math_constants.h",                              "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
+  // cuda-samples helper includes
+  {"helper_cuda.h",                                         {"hip/hip_runtime_api.h",                                 "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
+  {"helper_math.h",                                         {"hip/hip_vector_types.h",                                "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   // cuComplex includes
   {"cuComplex.h",                                           {"hip/hip_complex.h",                                     "",                                                               CONV_INCLUDE_CUDA_MAIN_H,    API_COMPLEX, 0}},
   // cuBLAS includes

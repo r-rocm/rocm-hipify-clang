@@ -64,7 +64,37 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
   file(GLOB_RECURSE HIPIFY_SOURCES src/*.cpp)
   file(GLOB_RECURSE HIPIFY_HEADERS src/*.h)
 
-  add_llvm_executable(hipify-clang ${HIPIFY_SOURCES} ${HIPIFY_HEADERS})
+  # In order to be compatible with an LLVM that uses LLVM_LINK_LLVM_DYLIB=ON,
+  # hipify-clang must link core LLVM libraries via LLVM_LINK_COMPONENTS vs directly adding
+  # them.
+  set(HIPIFY_ADDL_LINK_LIBS)
+  set(LLVM_LINK_COMPONENTS
+    ProfileData
+    Support
+    MCParser
+    MC
+    BitReader
+    Option
+    Core
+  )
+  
+  if(LLVM_PACKAGE_VERSION VERSION_GREATER "6.0.1")
+    list(APPEND HIPIFY_ADDL_LINK_LIBS clangToolingInclusions)
+  endif()
+
+  if(LLVM_PACKAGE_VERSION VERSION_GREATER "9.0.1")
+    list(APPEND LLVM_LINK_COMPONENTS FrontendOpenMP)
+  endif()
+
+  if(LLVM_PACKAGE_VERSION VERSION_EQUAL "15.0.0" OR LLVM_PACKAGE_VERSION VERSION_GREATER "15.0.0")
+    list(APPEND LLVM_LINK_COMPONENTS WindowsDriver)
+    list(APPEND HIPIFY_ADDL_LINK_LIBS clangSupport)
+  endif()
+
+
+  add_llvm_executable(hipify-clang
+    ${HIPIFY_SOURCES} ${HIPIFY_HEADERS}
+  )
   target_link_directories(hipify-clang PRIVATE ${LLVM_LIBRARY_DIRS})
 
   if(HIPIFY_INCLUDE_IN_HIP_SDK)
@@ -87,7 +117,12 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
           ${LLVM_BINARY_DIR}/tools/lld/include
           ${LLVM_EXTERNAL_LLD_SOURCE_DIR}/include)
     endif()
+
+  # Keep the existing compiler since MSVC-specific flags will be set later.
+  elseif(MSVC)
   else()
+    # Overriding CMAKE_CXX_COMPILER/CMAKE_C_COMPILER below is sketchy - could
+    # that be removed or reworked instead?
     set(CMAKE_CXX_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang++)
     set(CMAKE_C_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang)
   endif()
@@ -109,25 +144,8 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
     clangToolingCore
     clangRewrite
     clangBasic
-    LLVMProfileData
-    LLVMSupport
-    LLVMMCParser
-    LLVMMC
-    LLVMBitReader
-    LLVMOption
-    LLVMCore)
-
-  if(LLVM_PACKAGE_VERSION VERSION_GREATER "6.0.1")
-    target_link_libraries(hipify-clang PRIVATE clangToolingInclusions)
-  endif()
-
-  if(LLVM_PACKAGE_VERSION VERSION_GREATER "9.0.1")
-    target_link_libraries(hipify-clang PRIVATE LLVMFrontendOpenMP)
-  endif()
-
-  if(LLVM_PACKAGE_VERSION VERSION_EQUAL "15.0.0" OR LLVM_PACKAGE_VERSION VERSION_GREATER "15.0.0")
-    target_link_libraries(hipify-clang PRIVATE LLVMWindowsDriver clangSupport)
-  endif()
+    ${HIPIFY_ADDL_LINK_LIBS}
+  )
 
   if(LLVM_PACKAGE_VERSION VERSION_EQUAL "16.0.0" OR LLVM_PACKAGE_VERSION VERSION_GREATER "16.0.0")
     if(MSVC)
@@ -176,28 +194,36 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
 
   set(HIPIFY_BIN_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}/bin")
 
-  install(TARGETS hipify-clang DESTINATION bin)
-  # Install bin directory in CMAKE_INSTALL_PREFIX path.
-  install(
-    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin
-    DESTINATION .
-    PATTERN "hipify-perl"
-    PATTERN "*.sh"
-    PATTERN "findcode.sh" EXCLUDE
-    PATTERN "findcode_headers.sh" EXCLUDE
-    PATTERN "findcode_sources.sh" EXCLUDE
-    PATTERN "findcode_custom.sh" EXCLUDE
-    PATTERN "finduncodep.sh" EXCLUDE)
-
   set(HIPIFY_LIBEXEC_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBEXECDIR}/hipify")
 
+  install(TARGETS hipify-clang DESTINATION bin)
+
   install(
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/hipify-perl
     PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode.sh
     PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode_headers.sh
     PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode_sources.sh
     PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode_custom.sh
     PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/finduncodep.sh
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/hipconvertinplace.sh
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/hipconvertinplace-perl.sh
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/hipexamine.sh
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/hipexamine-perl.sh
     DESTINATION ${CMAKE_INSTALL_LIBEXECDIR}/hipify)
+
+  # Adding symlink for hipify-perl for backward compatibility
+  # Note: To be removed once hipify-perl install location usages
+  # are fully updated across modules Or hipify-perl is deprecated.
+  # This backward compatibility Not enabled for Win32 platforms 
+  if( NOT WIN32 )
+    install(
+      CODE "execute_process(
+          COMMAND bash -c \"set -e
+          cd \$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}
+          ln -sf ../${CMAKE_INSTALL_LIBEXECDIR}/hipify/hipify-perl ${CMAKE_INSTALL_BINDIR}/hipify-perl
+          \")")
+  endif()
+
 
   # Headers are already included in HIP SDK, so skip those if including HIPIFY in HIP SDK.
   if( HIPIFY_INSTALL_CLANG_HEADERS)
@@ -239,13 +265,7 @@ install(
     # Get rid of any RPATH definations already.
     set_target_properties(hipify-clang PROPERTIES INSTALL_RPATH "")
     # Set RPATH for the binary.
-    set_target_properties(hipify-clang PROPERTIES LINK_FLAGS "-Wl,--enable-new-dtags -Wl,--rpath,$ORIGIN/../lib" )
-
-    option(FILE_REORG_BACKWARD_COMPATIBILITY "Enable File Reorg with backward compatibility" OFF)
-
-    if(FILE_REORG_BACKWARD_COMPATIBILITY)
-      include(hipify-backward-compat.cmake)
-    endif()
+    set_target_properties(hipify-clang PROPERTIES LINK_FLAGS "-Wl,--enable-new-dtags -Wl,--rpath,\\$ORIGIN/../lib" )
 
     set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/rocm" CACHE PATH "HIP Package Installation Path")
     set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/packages/hipify-clang)

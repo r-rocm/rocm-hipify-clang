@@ -1,3 +1,9 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="NVIDIA CUDA APIs supported by HIPIFY">
+    <meta name="keywords" content="HIPIFY, HIP, ROCm, NVIDIA, CUDA, CUDA2HIP, hipification, hipify-clang, hipify-perl, SPARSE, cuSPARSE, rocSPARSE">
+</head>
+
 # CUSPARSE API supported by ROC
 
 
@@ -314,8 +320,8 @@
 |`cusparseCcsrsv2_solve`| |11.3| |12.0|`rocsparse_ccsrsv_solve`|2.10.0| | | | |
 |`cusparseCcsrsv_analysis`| |10.2| |11.0| | | | | | |
 |`cusparseCcsrsv_solve`| |10.2| |11.0| | | | | | |
-|`cusparseCgemvi`|7.5| | | |`rocsparse_cgemvi`|4.3.0| | | | |
-|`cusparseCgemvi_bufferSize`|7.5| | | |`rocsparse_cgemvi_buffer_size`|4.3.0| | | | |
+|`cusparseCgemvi`|7.5|12.8| | |`rocsparse_cgemvi`|4.3.0| | | | |
+|`cusparseCgemvi_bufferSize`|7.5|12.8| | |`rocsparse_cgemvi_buffer_size`|4.3.0| | | | |
 |`cusparseChybmv`| |10.2| |11.0|`rocsparse_chybmv`|2.10.0| | | | |
 |`cusparseChybsv_analysis`| |10.2| |11.0| | | | | | |
 |`cusparseChybsv_solve`| |10.2| |11.0| | | | | | |
@@ -337,8 +343,8 @@
 |`cusparseDcsrsv2_solve`| |11.3| |12.0|`rocsparse_dcsrsv_solve`|1.9.0| | | | |
 |`cusparseDcsrsv_analysis`| |10.2| |11.0| | | | | | |
 |`cusparseDcsrsv_solve`| |10.2| |11.0| | | | | | |
-|`cusparseDgemvi`|7.5| | | |`rocsparse_dgemvi`|4.3.0| | | | |
-|`cusparseDgemvi_bufferSize`|7.5| | | |`rocsparse_dgemvi_buffer_size`|4.3.0| | | | |
+|`cusparseDgemvi`|7.5|12.8| | |`rocsparse_dgemvi`|4.3.0| | | | |
+|`cusparseDgemvi_bufferSize`|7.5|12.8| | |`rocsparse_dgemvi_buffer_size`|4.3.0| | | | |
 |`cusparseDhybmv`| |10.2| |11.0|`rocsparse_dhybmv`|1.9.0| | | | |
 |`cusparseDhybsv_analysis`| |10.2| |11.0| | | | | | |
 |`cusparseDhybsv_solve`| |10.2| |11.0| | | | | | |
@@ -356,8 +362,8 @@
 |`cusparseScsrsv2_solve`| |11.3| |12.0|`rocsparse_scsrsv_solve`|1.9.0| | | | |
 |`cusparseScsrsv_analysis`| |10.2| |11.0| | | | | | |
 |`cusparseScsrsv_solve`| |10.2| |11.0| | | | | | |
-|`cusparseSgemvi`|7.5| | | |`rocsparse_sgemvi`|4.3.0| | | | |
-|`cusparseSgemvi_bufferSize`|7.5| | | |`rocsparse_sgemvi_buffer_size`|4.3.0| | | | |
+|`cusparseSgemvi`|7.5|12.8| | |`rocsparse_sgemvi`|4.3.0| | | | |
+|`cusparseSgemvi_bufferSize`|7.5|12.8| | |`rocsparse_sgemvi_buffer_size`|4.3.0| | | | |
 |`cusparseShybmv`| |10.2| |11.0|`rocsparse_shybmv`|1.9.0| | | | |
 |`cusparseShybsv_analysis`| |10.2| |11.0| | | | | | |
 |`cusparseShybsv_solve`| |10.2| |11.0| | | | | | |
@@ -377,8 +383,8 @@
 |`cusparseZcsrsv2_solve`| |11.3| |12.0|`rocsparse_zcsrsv_solve`|2.10.0| | | | |
 |`cusparseZcsrsv_analysis`| |10.2| |11.0| | | | | | |
 |`cusparseZcsrsv_solve`| |10.2| |11.0| | | | | | |
-|`cusparseZgemvi`|7.5| | | |`rocsparse_zgemvi`|4.3.0| | | | |
-|`cusparseZgemvi_bufferSize`|7.5| | | |`rocsparse_zgemvi_buffer_size`|4.3.0| | | | |
+|`cusparseZgemvi`|7.5|12.8| | |`rocsparse_zgemvi`|4.3.0| | | | |
+|`cusparseZgemvi_bufferSize`|7.5|12.8| | |`rocsparse_zgemvi_buffer_size`|4.3.0| | | | |
 |`cusparseZhybmv`| |10.2| |11.0|`rocsparse_zhybmv`|2.10.0| | | | |
 |`cusparseZhybsv_analysis`| |10.2| |11.0| | | | | | |
 |`cusparseZhybsv_solve`| |10.2| |11.0| | | | | | |
@@ -387,7 +393,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cusparseCbsrmm`| | | | |`rocsparse_cbsrmm`|3.7.0| | | | |
+|`cusparseCbsrmm`| |12.8| | |`rocsparse_cbsrmm`|3.7.0| | | | |
 |`cusparseCbsrsm2_analysis`| |12.2| | |`rocsparse_cbsrsm_analysis`|3.6.0| | | | |
 |`cusparseCbsrsm2_bufferSize`| |12.2| | |`rocsparse_cbsrsm_buffer_size`|4.5.0| | | | |
 |`cusparseCbsrsm2_bufferSizeExt`| |12.2| | | | | | | | |
@@ -400,7 +406,7 @@
 |`cusparseCcsrsm_analysis`| |10.2| |11.0| | | | | | |
 |`cusparseCcsrsm_solve`| |10.2| |11.0| | | | | | |
 |`cusparseCgemmi`|8.0|11.0| |12.0| | | | | | |
-|`cusparseDbsrmm`| | | | |`rocsparse_dbsrmm`|3.7.0| | | | |
+|`cusparseDbsrmm`| |12.8| | |`rocsparse_dbsrmm`|3.7.0| | | | |
 |`cusparseDbsrsm2_analysis`| |12.2| | |`rocsparse_dbsrsm_analysis`|3.6.0| | | | |
 |`cusparseDbsrsm2_bufferSize`| |12.2| | |`rocsparse_dbsrsm_buffer_size`|4.5.0| | | | |
 |`cusparseDbsrsm2_bufferSizeExt`| |12.2| | | | | | | | |
@@ -413,7 +419,7 @@
 |`cusparseDcsrsm_analysis`| |10.2| |11.0| | | | | | |
 |`cusparseDcsrsm_solve`| |10.2| |11.0| | | | | | |
 |`cusparseDgemmi`|8.0|11.0| |12.0| | | | | | |
-|`cusparseSbsrmm`| | | | |`rocsparse_sbsrmm`|3.7.0| | | | |
+|`cusparseSbsrmm`| |12.8| | |`rocsparse_sbsrmm`|3.7.0| | | | |
 |`cusparseSbsrsm2_analysis`| |12.2| | |`rocsparse_sbsrsm_analysis`|3.6.0| | | | |
 |`cusparseSbsrsm2_bufferSize`| |12.2| | |`rocsparse_sbsrsm_buffer_size`|4.5.0| | | | |
 |`cusparseSbsrsm2_bufferSizeExt`| |12.2| | | | | | | | |
@@ -428,7 +434,7 @@
 |`cusparseSgemmi`|8.0|11.0| |12.0| | | | | | |
 |`cusparseXbsrsm2_zeroPivot`| |12.2| | |`rocsparse_bsrsm_zero_pivot`|4.5.0| | | | |
 |`cusparseXcsrsm2_zeroPivot`|9.2|11.3| |12.0|`rocsparse_csrsm_zero_pivot`|3.1.0| | | | |
-|`cusparseZbsrmm`| | | | |`rocsparse_zbsrmm`|3.7.0| | | | |
+|`cusparseZbsrmm`| |12.8| | |`rocsparse_zbsrmm`|3.7.0| | | | |
 |`cusparseZbsrsm2_analysis`| |12.2| | |`rocsparse_zbsrsm_analysis`|3.6.0| | | | |
 |`cusparseZbsrsm2_bufferSize`| |12.2| | |`rocsparse_zbsrsm_buffer_size`|4.5.0| | | | |
 |`cusparseZbsrsm2_bufferSizeExt`| |12.2| | | | | | | | |
@@ -630,7 +636,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cusparseCbsr2csr`| | | | |`rocsparse_cbsr2csr`|3.10.0| | | | |
+|`cusparseCbsr2csr`| |12.8| | |`rocsparse_cbsr2csr`|3.10.0| | | | |
 |`cusparseCcsc2dense`| |11.1| |12.0|`rocsparse_ccsc2dense`|3.5.0| | | | |
 |`cusparseCcsc2hyb`| |10.2| |11.0| | | | | | |
 |`cusparseCcsr2bsr`| |12.4| | |`rocsparse_ccsr2bsr`|3.5.0| | | | |
@@ -651,9 +657,9 @@
 |`cusparseCgebsr2gebsc`| | | | |`rocsparse_cgebsr2gebsc`|4.1.0| | | | |
 |`cusparseCgebsr2gebsc_bufferSize`| | | | |`rocsparse_cgebsr2gebsc_buffer_size`|4.1.0| | | | |
 |`cusparseCgebsr2gebsc_bufferSizeExt`| | | | | | | | | | |
-|`cusparseCgebsr2gebsr`| | | | |`rocsparse_cgebsr2gebsr`|4.1.0| | | | |
-|`cusparseCgebsr2gebsr_bufferSize`| | | | |`rocsparse_cgebsr2gebsr_buffer_size`|4.1.0| | | | |
-|`cusparseCgebsr2gebsr_bufferSizeExt`| | | | | | | | | | |
+|`cusparseCgebsr2gebsr`| |12.8| | |`rocsparse_cgebsr2gebsr`|4.1.0| | | | |
+|`cusparseCgebsr2gebsr_bufferSize`| |12.8| | |`rocsparse_cgebsr2gebsr_buffer_size`|4.1.0| | | | |
+|`cusparseCgebsr2gebsr_bufferSizeExt`| |12.8| | | | | | | | |
 |`cusparseChyb2csc`| |10.2| |11.0| | | | | | |
 |`cusparseChyb2csr`| |10.2| |11.0| | | | | | |
 |`cusparseChyb2dense`| |10.2| |11.0| | | | | | |
@@ -664,7 +670,7 @@
 |`cusparseCsr2cscEx`|8.0|10.2| |11.0| | | | | | |
 |`cusparseCsr2cscEx2`|10.1| | | | | | | | | |
 |`cusparseCsr2cscEx2_bufferSize`|10.1| | | |`rocsparse_csr2csc_buffer_size`|1.9.0| | | | |
-|`cusparseDbsr2csr`| | | | |`rocsparse_dbsr2csr`|3.10.0| | | | |
+|`cusparseDbsr2csr`| |12.8| | |`rocsparse_dbsr2csr`|3.10.0| | | | |
 |`cusparseDcsc2dense`| |11.1| |12.0|`rocsparse_dcsc2dense`|3.5.0| | | | |
 |`cusparseDcsc2hyb`| |10.2| |11.0| | | | | | |
 |`cusparseDcsr2bsr`| |12.4| | |`rocsparse_dcsr2bsr`|3.5.0| | | | |
@@ -686,9 +692,9 @@
 |`cusparseDgebsr2gebsc`| | | | |`rocsparse_dgebsr2gebsc`|4.1.0| | | | |
 |`cusparseDgebsr2gebsc_bufferSize`| | | | |`rocsparse_dgebsr2gebsc_buffer_size`|4.1.0| | | | |
 |`cusparseDgebsr2gebsc_bufferSizeExt`| | | | | | | | | | |
-|`cusparseDgebsr2gebsr`| | | | |`rocsparse_dgebsr2gebsr`|4.1.0| | | | |
-|`cusparseDgebsr2gebsr_bufferSize`| | | | |`rocsparse_dgebsr2gebsr_buffer_size`|4.1.0| | | | |
-|`cusparseDgebsr2gebsr_bufferSizeExt`| | | | | | | | | | |
+|`cusparseDgebsr2gebsr`| |12.8| | |`rocsparse_dgebsr2gebsr`|4.1.0| | | | |
+|`cusparseDgebsr2gebsr_bufferSize`| |12.8| | |`rocsparse_dgebsr2gebsr_buffer_size`|4.1.0| | | | |
+|`cusparseDgebsr2gebsr_bufferSizeExt`| |12.8| | | | | | | | |
 |`cusparseDhyb2csc`| |10.2| |11.0| | | | | | |
 |`cusparseDhyb2csr`| |10.2| |11.0| | | | | | |
 |`cusparseDhyb2dense`| |10.2| |11.0| | | | | | |
@@ -718,7 +724,7 @@
 |`cusparseHpruneDense2csrNnz`|9.0|12.2| | | | | | | | |
 |`cusparseHpruneDense2csrNnzByPercentage`|9.0|12.2| | | | | | | | |
 |`cusparseHpruneDense2csr_bufferSizeExt`|9.0|12.2| | | | | | | | |
-|`cusparseSbsr2csr`| | | | |`rocsparse_sbsr2csr`|3.10.0| | | | |
+|`cusparseSbsr2csr`| |12.8| | |`rocsparse_sbsr2csr`|3.10.0| | | | |
 |`cusparseScsc2dense`| |11.1| |12.0|`rocsparse_scsc2dense`|3.5.0| | | | |
 |`cusparseScsc2hyb`| |10.2| |11.0| | | | | | |
 |`cusparseScsr2bsr`| |12.4| | |`rocsparse_scsr2bsr`|3.5.0| | | | |
@@ -739,9 +745,9 @@
 |`cusparseSgebsr2gebsc`| | | | |`rocsparse_sgebsr2gebsc`|4.1.0| | | | |
 |`cusparseSgebsr2gebsc_bufferSize`| | | | |`rocsparse_sgebsr2gebsc_buffer_size`|4.1.0| | | | |
 |`cusparseSgebsr2gebsc_bufferSizeExt`| | | | | | | | | | |
-|`cusparseSgebsr2gebsr`| | | | |`rocsparse_sgebsr2gebsr`|4.1.0| | | | |
-|`cusparseSgebsr2gebsr_bufferSize`| | | | |`rocsparse_sgebsr2gebsr_buffer_size`|4.1.0| | | | |
-|`cusparseSgebsr2gebsr_bufferSizeExt`| | | | | | | | | | |
+|`cusparseSgebsr2gebsr`| |12.8| | |`rocsparse_sgebsr2gebsr`|4.1.0| | | | |
+|`cusparseSgebsr2gebsr_bufferSize`| |12.8| | |`rocsparse_sgebsr2gebsr_buffer_size`|4.1.0| | | | |
+|`cusparseSgebsr2gebsr_bufferSizeExt`| |12.8| | | | | | | | |
 |`cusparseShyb2csc`| |10.2| |11.0| | | | | | |
 |`cusparseShyb2csr`| |10.2| |11.0| | | | | | |
 |`cusparseShyb2dense`| |10.2| |11.0| | | | | | |
@@ -771,8 +777,8 @@
 |`cusparseXcsrsort`| | | | |`rocsparse_csrsort`|1.9.0| | | | |
 |`cusparseXcsrsort_bufferSizeExt`| | | | |`rocsparse_csrsort_buffer_size`|1.9.0| | | | |
 |`cusparseXgebsr2csr`| |12.4| | | | | | | | |
-|`cusparseXgebsr2gebsrNnz`| | | | |`rocsparse_gebsr2gebsr_nnz`|4.1.0| | | | |
-|`cusparseZbsr2csr`| | | | |`rocsparse_zbsr2csr`|3.10.0| | | | |
+|`cusparseXgebsr2gebsrNnz`| |12.8| | |`rocsparse_gebsr2gebsr_nnz`|4.1.0| | | | |
+|`cusparseZbsr2csr`| |12.8| | |`rocsparse_zbsr2csr`|3.10.0| | | | |
 |`cusparseZcsc2dense`| |11.1| |12.0|`rocsparse_zcsc2dense`|3.5.0| | | | |
 |`cusparseZcsc2hyb`| |10.2| |11.0| | | | | | |
 |`cusparseZcsr2bsr`| |12.4| | |`rocsparse_zcsr2bsr`|3.5.0| | | | |
@@ -793,9 +799,9 @@
 |`cusparseZgebsr2gebsc`| | | | |`rocsparse_zgebsr2gebsc`|4.1.0| | | | |
 |`cusparseZgebsr2gebsc_bufferSize`| | | | |`rocsparse_zgebsr2gebsc_buffer_size`|4.1.0| | | | |
 |`cusparseZgebsr2gebsc_bufferSizeExt`| | | | | | | | | | |
-|`cusparseZgebsr2gebsr`| | | | |`rocsparse_zgebsr2gebsr`|4.1.0| | | | |
-|`cusparseZgebsr2gebsr_bufferSize`| | | | |`rocsparse_zgebsr2gebsr_buffer_size`|4.1.0| | | | |
-|`cusparseZgebsr2gebsr_bufferSizeExt`| | | | | | | | | | |
+|`cusparseZgebsr2gebsr`| |12.8| | |`rocsparse_zgebsr2gebsr`|4.1.0| | | | |
+|`cusparseZgebsr2gebsr_bufferSize`| |12.8| | |`rocsparse_zgebsr2gebsr_buffer_size`|4.1.0| | | | |
+|`cusparseZgebsr2gebsr_bufferSizeExt`| |12.8| | | | | | | | |
 |`cusparseZhyb2csc`| |10.2| |11.0| | | | | | |
 |`cusparseZhyb2csr`| |10.2| |11.0| | | | | | |
 |`cusparseZhyb2dense`| |10.2| |11.0| | | | | | |
@@ -806,7 +812,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cusparseAxpby`|11.0| |12.0| |`rocsparse_axpby`|4.1.0| |6.0.0| | |
+|`cusparseAxpby`|11.0|12.8|12.0| |`rocsparse_axpby`|4.1.0| |6.0.0| | |
 |`cusparseBlockedEllGet`|11.2| | | |`rocsparse_bell_get`|4.1.0| | | | |
 |`cusparseBsrSetStridedBatch`|12.1| | | | | | | | | |
 |`cusparseConstBlockedEllGet`|12.0| | | |`rocsparse_const_bell_get`|6.0.0| | | | |
@@ -914,8 +920,8 @@
 |`cusparseSpSV_destroyDescr`|11.3| | | | | | | | | |
 |`cusparseSpSV_solve`|11.3| |12.0| | | | | | | |
 |`cusparseSpSV_updateMatrix`|12.1| | | | | | | | | |
-|`cusparseSpVV`|10.1| |12.0| |`rocsparse_spvv`|4.1.0| |6.0.0| | |
-|`cusparseSpVV_bufferSize`|10.1| |12.0| |`rocsparse_spvv`|4.1.0| |6.0.0| | |
+|`cusparseSpVV`|10.1|12.8|12.0| |`rocsparse_spvv`|4.1.0| |6.0.0| | |
+|`cusparseSpVV_bufferSize`|10.1|12.8|12.0| |`rocsparse_spvv`|4.1.0| |6.0.0| | |
 |`cusparseSpVecGet`|10.2| | | |`rocsparse_spvec_get`|4.1.0| | | | |
 |`cusparseSpVecGetIndexBase`|10.2| |12.0| |`rocsparse_spvec_get_index_base`|4.1.0| |6.0.0| | |
 |`cusparseSpVecGetValues`|10.2| | | |`rocsparse_spvec_get_values`|4.1.0| | | | |

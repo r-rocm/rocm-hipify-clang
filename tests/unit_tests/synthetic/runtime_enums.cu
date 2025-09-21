@@ -80,7 +80,7 @@ int main() {
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrMaxTexture3DWidthAlt = hipDeviceAttributeMaxTexture3DAlt;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrMaxTexture3DHeightAlt = hipDeviceAttributeMaxTexture3DAlt;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrMaxTexture3DDepthAlt = hipDeviceAttributeMaxTexture3DAlt;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrPciDomainId = hipDeviceAttributePciDomainID;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrPciDomainId = hipDeviceAttributePciDomainId;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrTexturePitchAlignment = hipDeviceAttributeTexturePitchAlignment;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrMaxTextureCubemapWidth = hipDeviceAttributeMaxTextureCubemap;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrMaxTextureCubemapLayeredWidth = hipDeviceAttributeMaxTextureCubemapLayered;
@@ -735,6 +735,11 @@ int main() {
   // CHECK-NEXT: hipGraphNodeType GraphNodeTypeEventRecord = hipGraphNodeTypeEventRecord;
   cudaGraphNodeType GraphNodeTypeWaitEvent = cudaGraphNodeTypeWaitEvent;
   cudaGraphNodeType GraphNodeTypeEventRecord = cudaGraphNodeTypeEventRecord;
+
+  // CHECK: int EventRecordDefault = hipEventRecordDefault;
+  // CHECK-NEXT: int EventRecordExternal = hipEventRecordExternal;
+  int EventRecordDefault = cudaEventRecordDefault;
+  int EventRecordExternal = cudaEventRecordExternal;
 #endif
 
 #if CUDA_VERSION >= 11020
@@ -945,6 +950,45 @@ int main() {
   cudaGraphDependencyType_enum graphDependencyType_enum;
   cudaGraphDependencyType GRAPH_DEPENDENCY_TYPE_DEFAULT = cudaGraphDependencyTypeDefault;
   cudaGraphDependencyType GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC = cudaGraphDependencyTypeProgrammatic;
+#endif
+
+#if CUDA_VERSION >= 12080
+  // CHECK: hipJitOption jit_option;
+  // CHECK-NEXT: hipJitOption JIT_MAX_REGISTERS = hipJitOptionMaxRegisters;
+  // CHECK-NEXT: hipJitOption JIT_THREADS_PER_BLOCK = hipJitOptionThreadsPerBlock;
+  // CHECK-NEXT: hipJitOption JIT_WALL_TIME = hipJitOptionWallTime;
+  // CHECK-NEXT: hipJitOption JIT_INFO_LOG_BUFFER = hipJitOptionInfoLogBuffer;
+  // CHECK-NEXT: hipJitOption JIT_INFO_LOG_BUFFER_SIZE_BYTES = hipJitOptionInfoLogBufferSizeBytes;
+  // CHECK-NEXT: hipJitOption JIT_ERROR_LOG_BUFFER = hipJitOptionErrorLogBuffer;
+  // CHECK-NEXT: hipJitOption JIT_ERROR_LOG_BUFFER_SIZE_BYTES = hipJitOptionErrorLogBufferSizeBytes;
+  // CHECK-NEXT: hipJitOption JIT_OPTIMIZATION_LEVEL = hipJitOptionOptimizationLevel;
+  // CHECK-NEXT: hipJitOption JIT_FALLBACK_STRATEGY = hipJitOptionFallbackStrategy;
+  // CHECK-NEXT: hipJitOption JIT_GENERATE_DEBUG_INFO = hipJitOptionGenerateDebugInfo;
+  // CHECK-NEXT: hipJitOption JIT_LOG_VERBOSE = hipJitOptionLogVerbose;
+  // CHECK-NEXT: hipJitOption JIT_GENERATE_LINE_INFO = hipJitOptionGenerateLineInfo;
+  // CHECK-NEXT: hipJitOption JIT_CACHE_MODE = hipJitOptionCacheMode;
+  // CHECK-NEXT: hipJitOption JIT_POSITION_INDEPENDENT_CODE = hipJitOptionPositionIndependentCode;
+  // CHECK-NEXT: hipJitOption JIT_MIN_CTA_PER_SM = hipJitOptionMinCTAPerSM;
+  // CHECK-NEXT: hipJitOption JIT_MAX_THREADS_PER_BLOCK = hipJitOptionMaxThreadsPerBlock;
+  // CHECK-NEXT: hipJitOption JIT_OVERRIDE_DIRECTIVE_VALUES = hipJitOptionOverrideDirectiveValues;
+  cudaJitOption jit_option;
+  cudaJitOption JIT_MAX_REGISTERS = cudaJitMaxRegisters;
+  cudaJitOption JIT_THREADS_PER_BLOCK = cudaJitThreadsPerBlock;
+  cudaJitOption JIT_WALL_TIME = cudaJitWallTime;
+  cudaJitOption JIT_INFO_LOG_BUFFER = cudaJitInfoLogBuffer;
+  cudaJitOption JIT_INFO_LOG_BUFFER_SIZE_BYTES = cudaJitInfoLogBufferSizeBytes;
+  cudaJitOption JIT_ERROR_LOG_BUFFER = cudaJitErrorLogBuffer;
+  cudaJitOption JIT_ERROR_LOG_BUFFER_SIZE_BYTES = cudaJitErrorLogBufferSizeBytes;
+  cudaJitOption JIT_OPTIMIZATION_LEVEL = cudaJitOptimizationLevel;
+  cudaJitOption JIT_FALLBACK_STRATEGY = cudaJitFallbackStrategy;
+  cudaJitOption JIT_GENERATE_DEBUG_INFO = cudaJitGenerateDebugInfo;
+  cudaJitOption JIT_LOG_VERBOSE = cudaJitLogVerbose;
+  cudaJitOption JIT_GENERATE_LINE_INFO = cudaJitGenerateLineInfo;
+  cudaJitOption JIT_CACHE_MODE = cudaJitCacheMode;
+  cudaJitOption JIT_POSITION_INDEPENDENT_CODE = cudaJitPositionIndependentCode;
+  cudaJitOption JIT_MIN_CTA_PER_SM = cudaJitMinCtaPerSm;
+  cudaJitOption JIT_MAX_THREADS_PER_BLOCK = cudaJitMaxThreadsPerBlock;
+  cudaJitOption JIT_OVERRIDE_DIRECTIVE_VALUES = cudaJitOverrideDirectiveValues;
 #endif
 
   return 0;

@@ -3,6 +3,23 @@
 Documentation for HIPIFY is available at
 [https://rocmdocs.amd.com/projects/HIPIFY/en/latest/](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
+## HIPIFY for ROCm 7.0.0
+
+### Added
+
+* CUDA 12.9.1 support
+* cuDNN 9.11.0 support
+* cuTENSOR 2.2.0.0 support
+* LLVM 20.1.8 support
+
+### Resolved issues
+
+* `hipDNN` support is removed by default
+* [#1859](https://github.com/ROCm/HIPIFY/issues/1859)[hipify-perl] Fix warnings on unsupported Driver or Runtime APIs which were erroneously not reported
+* [#1930](https://github.com/ROCm/HIPIFY/issues/1930) Revise `JIT API`
+* [#1962](https://github.com/ROCm/HIPIFY/issues/1962) Support for cuda-samples helper headers
+* [#2035](https://github.com/ROCm/HIPIFY/issues/2035) Remove `const_cast<const char**>` in `hiprtcCreateProgram` and `hiprtcCompileProgram`
+
 ## HIPIFY for ROCm 6.4.0
 
 ### Added

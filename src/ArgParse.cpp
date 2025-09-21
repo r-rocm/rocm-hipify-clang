@@ -214,17 +214,16 @@ cl::opt<bool> Versions("versions",
   cl::value_desc("versions"),
   cl::cat(ToolTemplateCategory));
 
-// NOTE: A temporary solution; to remove after fixing https://github.com/ROCm/hipBLAS/issues/366
-cl::opt<bool> UseHipDataType("use-hip-data-types",
-  cl::desc("Use 'hipDataType' instead of 'hipblasDatatype_t' or 'rocblas_datatype'"),
-  cl::value_desc("use-hip-data-types"),
-  cl::init(false),
-  cl::cat(ToolTemplateCategory));
-
 cl::opt<std::string> ClangResourceDir("clang-resource-directory",
   cl::desc("The clang resource path - the path to the parent folder for the 'include' folder, containing '__clang_cuda_runtime_wrapper.h' and other header files used on runtime"),
   cl::value_desc("directory"),
   cl::ZeroOrMore,
+  cl::cat(ToolTemplateCategory));
+
+cl::opt<bool> HipDnnSupport("hipdnn",
+  cl::desc("Enable/disable hipDNN hipification support; disabled by default"),
+  cl::value_desc("hipdnn"),
+  cl::init(false),
   cl::cat(ToolTemplateCategory));
 
 cl::extrahelp CommonHelp(ct::CommonOptionsParser::HelpMessage);
@@ -255,6 +254,7 @@ const std::vector<std::string> hipifyOptions {
   std::string(NoWarningsUndocumented.ArgStr),
   std::string(HipifyAMAP.ArgStr),
   std::string(ClangResourceDir.ArgStr),
+  std::string(HipDnnSupport.ArgStr),
 };
 
 const std::vector<std::string> hipifyOptionsWithTwoArgs {

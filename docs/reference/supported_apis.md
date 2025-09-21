@@ -19,7 +19,7 @@
 | CUSOLVER API     | [HIP SOLVER API](tables/CUSOLVER_API_supported_by_HIP.md)         |                                                           |                                                                         |
 | CURAND API       | [HIP RAND API](tables/CURAND_API_supported_by_HIP.md)             | [ROC RAND API](tables/CURAND_API_supported_by_ROC.md)     | [HIP + ROC RAND API](tables/CURAND_API_supported_by_HIP_and_ROC.md)     |
 | CUFFT API        | [HIP FFT API](tables/CUFFT_API_supported_by_HIP.md)               |                                                           |                                                                         |
-| CUDNN API        | [HIP DNN API](tables/CUDNN_API_supported_by_HIP.md)               | [MIOPEN API](tables/CUDNN_API_supported_by_MIOPEN.md)     | [HIP + MIOPEN API](tables/CUDNN_API_supported_by_HIP_and_MIOPEN.md)     |
+| CUDNN API        |                                                                   | [MIOPEN API](tables/CUDNN_API_supported_by_MIOPEN.md)     |                                                                         |
 | CUTENSOR API     | [HIP TENSOR API](tables/CUTENSOR_API_supported_by_HIP.md)         |                                                           |                                                                         |
 | CUB API          | [HIP CUB API](tables/CUB_API_supported_by_HIP.md)                 |                                                           |                                                                         |
 

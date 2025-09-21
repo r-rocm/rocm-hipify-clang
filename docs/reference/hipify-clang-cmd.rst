@@ -158,9 +158,6 @@ Options
     * - ``--temp-dir=<directory>``                          
       - Temporary directory
 
-    * - ``--use-hip-data-types``                            
-      - Use ``hipDataType`` instead of ``hipblasDatatype_t`` or ``rocblas_datatype``
-
     * - ``-v``                                              
       - Show commands to run and use verbose output
 

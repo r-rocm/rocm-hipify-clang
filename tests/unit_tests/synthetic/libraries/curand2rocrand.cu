@@ -153,6 +153,11 @@ int main() {
   curandStatePhilox4_32_10 statePhilox4_32_10;
   curandStatePhilox4_32_10_t statePhilox4_32_10_t;
 
+  // CHECK: rocrand_device::xorwow_engine stateXORWOW;
+  // CHECK-NEXT: rocrand_state_xorwow stateXORWOW_t;
+  curandStateXORWOW stateXORWOW;
+  curandStateXORWOW_t stateXORWOW_t;
+
   // CUDA: curandStatus_t CURANDAPI curandCreateGenerator(curandGenerator_t *generator, curandRngType_t rng_type);
   // ROC: rocrand_status ROCRANDAPI rocrand_create_generator(rocrand_generator * generator, rocrand_rng_type rng_type);
   // CHECK: status = rocrand_create_generator(&randGenerator, randRngType_t);

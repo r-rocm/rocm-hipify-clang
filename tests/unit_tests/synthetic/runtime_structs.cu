@@ -184,6 +184,18 @@ int main() {
   cudaMemAllocNodeParams MemAllocNodeParams;
 #endif
 
+#if CUDA_VERSION >= 11080
+  // CHECK: hipLaunchConfig_st LaunchConfig_st;
+  // CHECK-NEXT: hipLaunchConfig_t launchConfig;
+  cudaLaunchConfig_st LaunchConfig_st;
+  cudaLaunchConfig_t launchConfig;
+
+  // CHECK: hipLaunchAttribute_st LaunchAttribute_st;
+  // CHECK-NEXT: hipLaunchAttribute LaunchAttribute;
+  cudaLaunchAttribute_st LaunchAttribute_st;
+  cudaLaunchAttribute LaunchAttribute;
+#endif
+
 #if CUDA_VERSION < 12000
   // CHECK: surfaceReference surfaceRef;
   surfaceReference surfaceRef;

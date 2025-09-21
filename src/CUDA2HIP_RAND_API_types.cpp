@@ -116,8 +116,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   {"curandStateMRG32k3a_t",                            {"hiprandStateMRG32k3a_t",                         "rocrand_state_mrg32k3a",                                         CONV_TYPE, API_RAND, 1}},
   {"curandStatePhilox4_32_10",                         {"hiprandStatePhilox4_32_10",                      "rocrand_device::philox4x32_10_engine",                           CONV_TYPE, API_RAND, 1}},
   {"curandStatePhilox4_32_10_t",                       {"hiprandStatePhilox4_32_10_t",                    "rocrand_state_philox4x32_10",                                    CONV_TYPE, API_RAND, 1}},
-  {"curandStateXORWOW",                                {"hiprandStateXORWOW",                             "",                                                               CONV_TYPE, API_RAND, 1, ROC_UNSUPPORTED}},
-  {"curandStateXORWOW_t",                              {"hiprandStateXORWOW_t",                           "",                                                               CONV_TYPE, API_RAND, 1, ROC_UNSUPPORTED}},
+  {"curandStateXORWOW",                                {"hiprandStateXORWOW",                             "rocrand_device::xorwow_engine",                                  CONV_TYPE, API_RAND, 1}},
+  {"curandStateXORWOW_t",                              {"hiprandStateXORWOW_t",                           "rocrand_state_xorwow",                                           CONV_TYPE, API_RAND, 1}},
   {"curandState",                                      {"hiprandState",                                   "",                                                               CONV_TYPE, API_RAND, 1, ROC_UNSUPPORTED}},
   {"curandState_t",                                    {"hiprandState_t",                                 "",                                                               CONV_TYPE, API_RAND, 1, ROC_UNSUPPORTED}},
 
@@ -263,4 +263,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_TYPE_NAME_VER_MAP {
   {"rocrand_state_sobol64",                            {HIP_4050, HIP_0,    HIP_0   }},
   {"rocrand_device::mrg32k3a_engine",                  {HIP_1050, HIP_0,    HIP_0   }},
   {"rocrand_state_mrg32k3a",                           {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocrand_device::xorwow_engine",                    {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocrand_state_xorwow",                             {HIP_1050, HIP_0,    HIP_0   }},
 };

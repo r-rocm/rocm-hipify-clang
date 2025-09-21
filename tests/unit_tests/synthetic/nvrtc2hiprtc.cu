@@ -27,12 +27,12 @@ int main() {
 
   // CUDA: nvrtcResult nvrtcCompileProgram(nvrtcProgram prog, int numOptions, const char* const* options);
   // HIP: hiprtcResult hiprtcCompileProgram(hiprtcProgram prog, int numOptions, const char** options);
-  // CHECK: rtcResult = hiprtcCompileProgram(rtcProgram, numOptions, const_cast<const char**>(&pOptions));
+  // CHECK: rtcResult = hiprtcCompileProgram(rtcProgram, numOptions, &pOptions);
   rtcResult = nvrtcCompileProgram(rtcProgram, numOptions, &pOptions);
 
   // CUDA: nvrtcResult nvrtcCreateProgram(nvrtcProgram *prog, const char* src, const char* name, int numHeaders, const char* const* headers, const char* const* includeNames);
-  // HIP: hiprtcResult hiprtcCreateProgram(hiprtcProgram* prog, const char* src, const char* name, int numHeaders, const char** headers, const char** includeNames);
-  // CHECK: rtcResult = hiprtcCreateProgram(&rtcProgram, pchSrc, pchName, numHeaders, const_cast<const char**>(&pHeadedrs), const_cast<const char**>(&pIncludeNames));
+  // HIP: hiprtcResult hiprtcCreateProgram(hiprtcProgram* prog, const char* src, const char* name, int numHeaders, const char* const* headers, const char* const* includeNames);
+  // CHECK: rtcResult = hiprtcCreateProgram(&rtcProgram, pchSrc, pchName, numHeaders, &pHeadedrs, &pIncludeNames);
   rtcResult = nvrtcCreateProgram(&rtcProgram, pchSrc, pchName, numHeaders, &pHeadedrs, &pIncludeNames);
 
   return 0;

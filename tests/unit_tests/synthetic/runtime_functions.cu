@@ -44,6 +44,7 @@ int main() {
   void *deviceptr = nullptr;
   void *deviceptr_2 = nullptr;
   void *symbolptr = nullptr;
+  void* flagsprt = nullptr;
   void *image = nullptr;
   void *func = nullptr;
   void *src = nullptr;
@@ -1577,6 +1578,18 @@ int main() {
   // HIP: hipError_t hipGraphNodeGetEnabled(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, unsigned int* isEnabled);
   // CHECK: result = hipGraphNodeGetEnabled(GraphExec_t, graphNode, &flags);
   result = cudaGraphNodeGetEnabled(GraphExec_t, graphNode, &flags);
+#endif
+
+#if CUDA_VERSION >= 11080
+  // CHECK: hipLaunchConfig_st LaunchConfig_st;
+  // CHECK-NEXT: hipLaunchConfig_t launchConfig;
+  cudaLaunchConfig_st LaunchConfig_st;
+  cudaLaunchConfig_t launchConfig;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLaunchKernelExC(const cudaLaunchConfig_t *config, const void *func, void **args);
+  // HIP: hipError_t hipLaunchKernelExC(const hipLaunchConfig_t* config, const void* fPtr, void** args);
+  // CHECK: result = hipLaunchKernelExC(&launchConfig, func, &flagsprt);
+  result = cudaLaunchKernelExC(&launchConfig, func, &flagsprt);
 #endif
 
 #if CUDA_VERSION < 12000

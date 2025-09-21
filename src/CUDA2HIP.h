@@ -137,6 +137,7 @@ const std::map<llvm::StringRef, cudaAPIversions> &CUDA_VERSIONS_MAP();
 
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP;
+extern const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_FUNCTION_CHANGED_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_FUNCTION_CHANGED_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP;
@@ -166,11 +167,15 @@ extern const std::map<llvm::StringRef, hipAPIversions> HIP_CUB_TYPE_NAME_VER_MAP
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_CUB_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_FUNCTION_VER_MAP;
+extern const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_RTC_FUNCTION_CHANGED_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RTC_FUNCTION_CHANGED_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_TENSOR_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_TENSOR_FUNCTION_VER_MAP;
+extern const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_TENSOR_FUNCTION_CHANGED_VER_MAP;
+extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_TENSOR_FUNCTION_CHANGED_VER_MAP;
+extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_TENSOR_TYPE_CHANGED_VER_MAP;
 
 /**
   * The union of all the above HIP maps.
@@ -229,14 +234,16 @@ namespace driver {
     DRIVER_ENTRY_POINT = 33,
     COREDUMP = 34,
     GREEN_CONTEXT = 35,
-    PROFILER_DEPRECATED = 36,
-    PROFILER = 37,
-    OPENGL = 38,
-    D3D9 = 39,
-    D3D10 = 40,
-    D3D11 = 41,
-    VDPAU = 42,
-    EGL = 43,
+    ERROR_LOG = 36,
+    CHECKPOINTING = 37,
+    PROFILER_DEPRECATED = 38,
+    PROFILER = 39,
+    OPENGL = 40,
+    D3D9 = 41,
+    D3D10 = 42,
+    D3D11 = 43,
+    VDPAU = 44,
+    EGL = 45,
   };
 }
 
@@ -273,14 +280,15 @@ namespace runtime {
     VERSION = 29,
     GRAPH = 30,
     DRIVER_ENTRY_POINT = 31,
-    CPP = 32,
-    DRIVER_INTERACT = 33,
-    PROFILER = 34,
-    DATA_TYPES = 35,
-    EXECUTION_REMOVED = 36,
-    TEXTURE_REMOVED = 37,
-    SURFACE_REMOVED = 38,
-    PROFILER_REMOVED = 39,
+    LIBRARY = 32,
+    CPP = 33,
+    DRIVER_INTERACT = 34,
+    PROFILER = 35,
+    DATA_TYPES = 36,
+    EXECUTION_REMOVED = 37,
+    TEXTURE_REMOVED = 38,
+    SURFACE_REMOVED = 39,
+    PROFILER_REMOVED = 40,
   };
 }
 

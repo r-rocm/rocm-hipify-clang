@@ -192,4 +192,16 @@ const clang::IdentifierInfo *getControllingMacro(clang::CompilerInstance &CI) {
 #endif
 }
 
+std::string getNamespaceDeclName(const clang::NestedNameSpecifier *NNS) {
+  std::string sEmpty = "";
+  if (!NNS) return sEmpty;
+#if LLVM_VERSION_MAJOR >= 22
+  const clang::NamespaceBaseDecl *nsd = NNS->getAsNamespace();
+#else
+  const clang::NamespaceDecl *nsd = NNS->getAsNamespace();
+#endif
+  if (!nsd) return sEmpty;
+  return nsd->getDeclName().getAsString();
+}
+
 } // namespace llcompat
