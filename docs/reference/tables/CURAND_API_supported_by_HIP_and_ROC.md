@@ -1,3 +1,9 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="NVIDIA CUDA APIs supported by HIPIFY">
+    <meta name="keywords" content="HIPIFY, HIP, ROCm, NVIDIA, CUDA, CUDA2HIP, hipification, hipify-clang, hipify-perl, RAND, cuRAND, hipRAND, rocRAND">
+</head>
+
 # CURAND API supported by 
 
 
@@ -98,8 +104,8 @@
 |`curandStateSobol32_t`| | | | |`hiprandStateSobol32_t`|1.5.0| | | | |`rocrand_state_sobol32`|1.5.0| | | | |
 |`curandStateSobol64`| | | | |`hiprandStateSobol64`|6.2.0| | | | |`rocrand_device::sobol64_engine<false>`|4.5.0| | | | |
 |`curandStateSobol64_t`| | | | |`hiprandStateSobol64_t`|6.2.0| | | | |`rocrand_state_sobol64`|4.5.0| | | | |
-|`curandStateXORWOW`| | | | |`hiprandStateXORWOW`|1.8.0| | | | | | | | | | |
-|`curandStateXORWOW_t`| | | | |`hiprandStateXORWOW_t`|1.5.0| | | | | | | | | | |
+|`curandStateXORWOW`| | | | |`hiprandStateXORWOW`|1.8.0| | | | |`rocrand_device::xorwow_engine`|1.5.0| | | | |
+|`curandStateXORWOW_t`| | | | |`hiprandStateXORWOW_t`|1.5.0| | | | |`rocrand_state_xorwow`|1.5.0| | | | |
 |`curandState_t`| | | | |`hiprandState_t`|1.5.0| | | | | | | | | | |
 |`curandStatus`| | | | |`hiprandStatus`|1.5.0| | | | |`rocrand_status`|1.5.0| | | | |
 |`curandStatus_t`| | | | |`hiprandStatus_t`|1.5.0| | | | |`rocrand_status`|1.5.0| | | | |

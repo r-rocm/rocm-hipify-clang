@@ -82,7 +82,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaSetValidDevices",                                     {"hipSetValidDevices",                                     "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE}},
   // NOTE: incompatible with cuDeviceGetTexture1DLinearMaxWidth
-  {"cudaDeviceGetTexture1DLinearMaxWidth",                    {"hipDeviceGetTexture1DLinearMaxWidth",                    "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE, HIP_EXPERIMENTAL}},
+  {"cudaDeviceGetTexture1DLinearMaxWidth",                    {"hipDeviceGetTexture1DLinearMaxWidth",                    "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE}},
   // cuDeviceGetDefaultMemPool
   {"cudaDeviceGetDefaultMemPool",                             {"hipDeviceGetDefaultMemPool",                             "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE}},
   // cuDeviceSetMemPool
@@ -176,6 +176,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaThreadExchangeStreamCaptureMode",                     {"hipThreadExchangeStreamCaptureMode",                     "", CONV_STREAM, API_RUNTIME, SEC::STREAM}},
   // cuStreamGetId
   {"cudaStreamGetId",                                         {"hipStreamGetId",                                         "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
+  // cuStreamGetDevice
+  {"cudaStreamGetDevice",                                     {"hipStreamGetDevice",                                     "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
 
   // 6. Event Management
   // no analogue
@@ -187,6 +189,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaEventDestroy",                                        {"hipEventDestroy",                                        "", CONV_EVENT, API_RUNTIME, SEC::EVENT}},
   // cuEventElapsedTime
   {"cudaEventElapsedTime",                                    {"hipEventElapsedTime",                                    "", CONV_EVENT, API_RUNTIME, SEC::EVENT}},
+  //
+  {"cudaEventElapsedTime_v2",                                 {"hipEventElapsedTime_v2",                                 "", CONV_EVENT, API_RUNTIME, SEC::EVENT, HIP_UNSUPPORTED}},
   // cuEventQuery
   {"cudaEventQuery",                                          {"hipEventQuery",                                          "", CONV_EVENT, API_RUNTIME, SEC::EVENT}},
   // cuEventRecord
@@ -194,7 +198,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuEventSynchronize
   {"cudaEventSynchronize",                                    {"hipEventSynchronize",                                    "", CONV_EVENT, API_RUNTIME, SEC::EVENT}},
   // cuEventRecordWithFlags
-  {"cudaEventRecordWithFlags",                                {"hipEventRecordWithFlags",                                "", CONV_EVENT, API_RUNTIME, SEC::EVENT, HIP_EXPERIMENTAL}},
+  {"cudaEventRecordWithFlags",                                {"hipEventRecordWithFlags",                                "", CONV_EVENT, API_RUNTIME, SEC::EVENT}},
 
   // 7. External Resource Interoperability
   // cuDestroyExternalMemory
@@ -244,7 +248,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaSetDoubleForHost",                                    {"hipSetDoubleForHost",                                    "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // no analogue
   // NOTE: Not equal to cuLaunchKernelEx due to different signatures
-  {"cudaLaunchKernelExC",                                     {"hipLaunchKernelExC",                                     "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED}},
+  {"cudaLaunchKernelExC",                                     {"hipLaunchKernelExC",                                     "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_EXPERIMENTAL}},
   // cuFuncGetName
   {"cudaFuncGetName",                                         {"hipFuncGetName",                                         "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED}},
   // cuFuncGetParamInfo
@@ -374,6 +378,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaMemcpyToSymbol",                                      {"hipMemcpyToSymbol",                                      "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // no analogue
   {"cudaMemcpyToSymbolAsync",                                 {"hipMemcpyToSymbolAsync",                                 "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
+  // cuMemcpyBatchAsync
+  {"cudaMemcpyBatchAsync",                                    {"hipMemcpyBatchAsync",                                    "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
+  // cuMemcpy3DBatchAsync
+  {"cudaMemcpy3DBatchAsync",                                  {"hipMemcpy3DBatchAsync",                                  "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cuMemGetInfo
   {"cudaMemGetInfo",                                          {"hipMemGetInfo",                                          "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemPrefetchAsync
@@ -881,22 +889,44 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   //
   {"cudaGetDriverEntryPointByVersion",                        {"hipGetDriverEntryPointByVersion",                        "", CONV_DRIVER_ENTRY_POINT, API_RUNTIME, SEC::DRIVER_ENTRY_POINT, HIP_UNSUPPORTED}},
 
-  // 32. C++ API Routines
+  // 32. Library Management
+  // cuLibraryLoadData
+  {"cudaLibraryLoadData",                                     {"hipLibraryLoadData",                                     "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  // cuLibraryLoadFromFile
+  {"cudaLibraryLoadFromFile",                                 {"hipLibraryLoadFromFile",                                 "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  // cuLibraryUnload
+  {"cudaLibraryUnload",                                       {"hipLibraryUnload",                                       "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  // cuLibraryGetKernel
+  {"cudaLibraryGetKernel",                                    {"hipLibraryGetKernel",                                    "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  // cuLibraryGetGlobal
+  {"cudaLibraryGetGlobal",                                    {"hipLibraryGetGlobal",                                    "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  // cuLibraryGetManaged
+  {"cudaLibraryGetManaged",                                   {"hipLibraryGetManaged",                                   "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  // cuLibraryGetUnifiedFunction
+  {"cudaLibraryGetUnifiedFunction",                           {"hipLibraryGetUnifiedFunction",                           "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  // cuKernelSetAttribute
+  {"cudaKernelSetAttributeForDevice",                         {"hipKernelSetAttribute",                                  "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  // cuLibraryGetKernelCount
+  {"cudaLibraryGetKernelCount",                               {"hipLibraryGetKernelCount",                               "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  // cuLibraryEnumerateKernels
+  {"cudaLibraryEnumerateKernels",                             {"hipLibraryEnumerateKernels",                             "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+
+  // 33. C++ API Routines
   {"cudaGetKernel",                                           {"hipGetKernel",                                           "", CONV_CPP, API_RUNTIME, SEC::CPP, HIP_UNSUPPORTED}},
 
-  // 33. Interactions with the CUDA Driver API
+  // 34. Interactions with the CUDA Driver API
   {"cudaGetFuncBySymbol",                                     {"hipGetFuncBySymbol",                                     "", CONV_DRIVER_INTERACT, API_RUNTIME, SEC::DRIVER_INTERACT}},
 
-  // 34. Profiler Control
+  // 35. Profiler Control
   // cuProfilerStart
   {"cudaProfilerStart",                                       {"hipProfilerStart",                                       "", CONV_PROFILER, API_RUNTIME, SEC::PROFILER, HIP_DEPRECATED}},
   // cuProfilerStop
   {"cudaProfilerStop",                                        {"hipProfilerStop",                                        "", CONV_PROFILER, API_RUNTIME, SEC::PROFILER, HIP_DEPRECATED}},
 
-  // 35. Data types used by CUDA Runtime
+  // 36. Data types used by CUDA Runtime
   // NOTE: in a separate file
 
-  // 36. Execution Control [REMOVED]
+  // 37. Execution Control [REMOVED]
   // NOTE: Removed in CUDA 10.1
   // no analogue
   {"cudaConfigureCall",                                       {"hipConfigureCall",                                       "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION_REMOVED, CUDA_REMOVED}},
@@ -906,7 +936,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaSetupArgument",                                       {"hipSetupArgument",                                       "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION_REMOVED, CUDA_REMOVED}},
 
-  // 37. Texture Reference Management [REMOVED]
+  // 38. Texture Reference Management [REMOVED]
   // NOTE: Removed in CUDA 12.0
   // no analogue
   {"cudaBindTexture",                                         {"hipBindTexture",                                         "", CONV_TEXTURE, API_RUNTIME, SEC::TEXTURE_REMOVED, HIP_DEPRECATED | CUDA_REMOVED}},
@@ -923,14 +953,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaUnbindTexture",                                       {"hipUnbindTexture",                                       "", CONV_TEXTURE, API_RUNTIME, SEC::TEXTURE_REMOVED, HIP_DEPRECATED | CUDA_REMOVED}},
 
-  // 38. Surface Reference Management [REMOVED]
+  // 39. Surface Reference Management [REMOVED]
   // NOTE: Removed in CUDA 12.0
   // no analogue
   {"cudaBindSurfaceToArray",                                  {"hipBindSurfaceToArray",                                  "", CONV_SURFACE, API_RUNTIME, SEC::SURFACE_REMOVED, HIP_UNSUPPORTED | CUDA_REMOVED}},
   // no analogue
   {"cudaGetSurfaceReference",                                 {"hipGetSurfaceReference",                                 "", CONV_SURFACE, API_RUNTIME, SEC::SURFACE_REMOVED, HIP_UNSUPPORTED | CUDA_REMOVED}},
 
-  // 39. Profiler Control [REMOVED]
+  // 40. Profiler Control [REMOVED]
   // cuProfilerInitialize
   {"cudaProfilerInitialize",                                  {"hipProfilerInitialize",                                  "", CONV_PROFILER, API_RUNTIME, SEC::PROFILER_REMOVED, HIP_UNSUPPORTED | CUDA_REMOVED}},
 };
@@ -1174,6 +1204,20 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaDeviceUnregisterAsyncNotification",                   {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cudaFuncGetParamInfo",                                    {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cudaGetDriverEntryPointByVersion",                        {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"cudaStreamGetDevice",                                     {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"cudaEventElapsedTime_v2",                                 {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"cudaMemcpyBatchAsync",                                    {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"cudaMemcpy3DBatchAsync",                                  {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"cudaLibraryLoadData",                                     {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"cudaLibraryLoadFromFile",                                 {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"cudaLibraryUnload",                                       {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"cudaLibraryGetKernel",                                    {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"cudaLibraryGetGlobal",                                    {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"cudaLibraryGetManaged",                                   {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"cudaLibraryGetUnifiedFunction",                           {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"cudaKernelSetAttributeForDevice",                         {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"cudaLibraryGetKernelCount",                               {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"cudaLibraryEnumerateKernels",                             {CUDA_128, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
@@ -1437,6 +1481,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipGraphExecGetFlags",                                    {HIP_6030, HIP_0,    HIP_0   }},
   {"hipGraphNodeSetParams",                                   {HIP_6030, HIP_0,    HIP_0   }},
   {"hipGraphExecNodeSetParams",                               {HIP_6030, HIP_0,    HIP_0   }},
+  {"hipLaunchKernelExC",                                      {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CHANGED_VER_MAP {
@@ -1475,6 +1520,7 @@ const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
   {SEC::VERSION, "Version Management"},
   {SEC::GRAPH, "Graph Management"},
   {SEC::DRIVER_ENTRY_POINT, "Driver Entry Point Access"},
+  {SEC::LIBRARY, "Library Management"},
   {SEC::CPP, "C++ API Routines"},
   {SEC::DRIVER_INTERACT, "Interactions with the CUDA Driver API"},
   {SEC::PROFILER, "Profiler Control"},

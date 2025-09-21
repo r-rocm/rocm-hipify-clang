@@ -763,6 +763,16 @@ int main() {
   // CHECK: status = hipsolverSpDcsrlsvqr(SpHandle_t, m, nnzA, MatDescr_t, &dcsrVal, &icsrRowPtr, &icsrColInd, &dB, dtol, ireorder, &dX, &isingularity);
   status = cusolverSpDcsrlsvqr(SpHandle_t, m, nnzA, MatDescr_t, &dcsrVal, &icsrRowPtr, &icsrColInd, &dB, dtol, ireorder, &dX, &isingularity);
 
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverSpCcsrlsvqr(cusolverSpHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, const cuComplex* csrVal, const int* csrRowPtr, const int* csrColInd, const cuComplex* b, float tol, int reorder, cuComplex* x, int* singularity);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverSpCcsrlsvqr(hipsolverSpHandle_t handle, int n, int nnz, const hipsparseMatDescr_t descrA, const hipFloatComplex* csrVal, const int* csrRowPts, const int* csrColInd, const hipFloatComplex* b, double tolerance, int reorder, hipFloatComplex* x, int* singularity);
+  // CHECK: status = hipsolverSpCcsrlsvqr(SpHandle_t, m, nnzA, MatDescr_t, &complexA, &icsrRowPtr, &icsrColInd, &complexB, ftol, ireorder, &complexX, &isingularity);
+  status = cusolverSpCcsrlsvqr(SpHandle_t, m, nnzA, MatDescr_t, &complexA, &icsrRowPtr, &icsrColInd, &complexB, ftol, ireorder, &complexX, &isingularity);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverSpZcsrlsvqr(cusolverSpHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, const cuDoubleComplex* csrVal, const int* csrRowPtr, const int* csrColInd, const cuDoubleComplex* b, double tol, int reorder, cuDoubleComplex* x, int* singularity);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverSpZcsrlsvqr(hipsolverSpHandle_t handle, int n, int nnz, const hipsparseMatDescr_t descrA, const hipDoubleComplex* csrVal, const int* csrRowPts, const int* csrColInd, const hipDoubleComplex* b, double tolerance, int reorder, hipDoubleComplex* x, int* singularity);
+  // CHECK: status = hipsolverSpZcsrlsvqr(SpHandle_t, m, nnzA, MatDescr_t, &dComplexA, &icsrRowPtr, &icsrColInd, &dComplexB, ftol, ireorder, &dComplexX, &isingularity);
+  status = cusolverSpZcsrlsvqr(SpHandle_t, m, nnzA, MatDescr_t, &dComplexA, &icsrRowPtr, &icsrColInd, &dComplexB, ftol, ireorder, &dComplexX, &isingularity);
+
 #if CUDA_VERSION >= 8000
   // CHECK: hipDataType dataTypeA, dataTypeB, dataTypeTau, computeType;
   cudaDataType dataTypeA, dataTypeB, dataTypeTau, computeType;

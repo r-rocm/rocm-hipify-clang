@@ -55,6 +55,8 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "driver_entry_point", // CONV_DRIVER_ENTRY_POINT
   "cpp", // CONV_CPP
   "coredump", // CONV_COREDUMP
+  "green_context", // CONV_GREEN_CONTEXT
+  "error_log", // CONV_ERROR_LOG
   "driver_interact", // CONV_DRIVER_INTERACT
   "profiler", // CONV_PROFILER
   "openGL", // CONV_OPENGL
@@ -108,6 +110,8 @@ const char *counterTypes[NUM_CONV_TYPES] = {
   "CONV_DRIVER_ENTRY_POINT",
   "CONV_CPP",
   "CONV_COREDUMP",
+  "CONV_GREEN_CONTEXT",
+  "CONV_ERROR_LOG",
   "CONV_DRIVER_INTERACT",
   "CONV_PROFILER",
   "CONV_OPENGL",
@@ -493,6 +497,8 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUDA_124: return "12.4";
     case CUDA_125: return "12.5";
     case CUDA_126: return "12.6";
+    case CUDA_128: return "12.8";
+    case CUDA_129: return "12.9";
     case CUDNN_10: return "1.0.0";
     case CUDNN_20: return "2.0.0";
     case CUDNN_30: return "3.0.0";
@@ -549,6 +555,10 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUDNN_950: return "9.5.0";
     case CUDNN_960: return "9.6.0";
     case CUDNN_970: return "9.7.0";
+    case CUDNN_980: return "9.8.0";
+    case CUDNN_990: return "9.9.0";
+    case CUDNN_9100: return "9.10.0";
+    case CUDNN_9110: return "9.11.0";
     case CUTENSOR_1010: return "1.0.1.0";
     case CUTENSOR_1100: return "1.1.0.0";
     case CUTENSOR_1200: return "1.2.0.0";
@@ -568,6 +578,8 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUTENSOR_2010: return "2.0.1.0";
     case CUTENSOR_2020: return "2.0.2.0";
     case CUTENSOR_2021: return "2.0.2.1";
+    case CUTENSOR_2109: return "2.1.0.9";
+    case CUTENSOR_2200: return "2.2.0.0";
   }
   return "";
 }
@@ -643,6 +655,7 @@ std::string Statistics::getHipVersion(const hipVersions &ver) {
     case HIP_6020: return "6.2.0";
     case HIP_6030: return "6.3.0";
     case HIP_6040: return "6.4.0";
+    case HIP_7000: return "7.0.0";
   }
   return "";
 }

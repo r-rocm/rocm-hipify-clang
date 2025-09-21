@@ -1,3 +1,9 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="NVIDIA CUDA APIs supported by HIPIFY">
+    <meta name="keywords" content="HIPIFY, HIP, ROCm, NVIDIA, CUDA, CUDA2HIP, hipification, hipify-clang, hipify-perl, Device API">
+</head>
+
 # CUDA DEVICE API supported by HIP
 
 
@@ -374,16 +380,93 @@
 |`__mul24`| | | | |`__mul24`|1.6.0| | | | |
 |`__mul64hi`| | | | |`__mul64hi`|1.6.0| | | | |
 |`__mulhi`| | | | |`__mulhi`|1.6.0| | | | |
+|`__nv_bswap16`|12.8| | | | | | | | | |
+|`__nv_bswap32`|12.8| | | | | | | | | |
+|`__nv_bswap64`|12.8| | | | | | | | | |
+|`__nv_cvt_bfloat162raw_to_e8m0x2`|12.8| | | | | | | | | |
+|`__nv_cvt_bfloat16raw2_to_fp4x2`|12.8| | | |`__hip_cvt_bfloat16raw2_to_fp4x2`|7.0.0| | | |7.0.0|
+|`__nv_cvt_bfloat16raw2_to_fp6x2`|12.8| | | | | | | | | |
 |`__nv_cvt_bfloat16raw2_to_fp8x2`|11.8| | | |`__hip_cvt_bfloat16raw2_to_fp8x2`|6.2.0| | | | |
+|`__nv_cvt_bfloat16raw_to_e8m0`|12.8| | | | | | | | | |
+|`__nv_cvt_bfloat16raw_to_fp4`|12.8| | | |`__hip_cvt_bfloat16raw_to_fp4`|7.0.0| | | |7.0.0|
+|`__nv_cvt_bfloat16raw_to_fp6`|12.8| | | | | | | | | |
 |`__nv_cvt_bfloat16raw_to_fp8`|11.8| | | |`__hip_cvt_bfloat16raw_to_fp8`|6.2.0| | | | |
+|`__nv_cvt_double2_to_e8m0x2`|12.8| | | | | | | | | |
+|`__nv_cvt_double2_to_fp4x2`|12.8| | | |`__hip_cvt_double2_to_fp4x2`|7.0.0| | | |7.0.0|
+|`__nv_cvt_double2_to_fp6x2`|12.8| | | | | | | | | |
 |`__nv_cvt_double2_to_fp8x2`|11.8| | | |`__hip_cvt_double2_to_fp8x2`|6.2.0| | | | |
+|`__nv_cvt_double_to_e8m0`|12.8| | | | | | | | | |
+|`__nv_cvt_double_to_fp4`|12.8| | | |`__hip_cvt_double_to_fp4`|7.0.0| | | |7.0.0|
+|`__nv_cvt_double_to_fp6`|12.8| | | | | | | | | |
 |`__nv_cvt_double_to_fp8`|11.8| | | |`__hip_cvt_double_to_fp8`|6.2.0| | | | |
+|`__nv_cvt_e8m0_to_bf16raw`|12.8| | | | | | | | | |
+|`__nv_cvt_e8m0x2_to_bf162raw`|12.8| | | | | | | | | |
+|`__nv_cvt_float2_to_e8m0x2`|12.8| | | | | | | | | |
+|`__nv_cvt_float2_to_fp4x2`|12.8| | | |`__hip_cvt_float2_to_fp4x2`|7.0.0| | | |7.0.0|
+|`__nv_cvt_float2_to_fp6x2`|12.8| | | | | | | | | |
 |`__nv_cvt_float2_to_fp8x2`|11.8| | | |`__hip_cvt_float2_to_fp8x2`|6.2.0| | | | |
+|`__nv_cvt_float_to_e8m0`|12.8| | | | | | | | | |
+|`__nv_cvt_float_to_fp4`|12.8| | | |`__hip_cvt_float_to_fp4`|7.0.0| | | |7.0.0|
+|`__nv_cvt_float_to_fp6`|12.8| | | | | | | | | |
 |`__nv_cvt_float_to_fp8`|11.8| | | |`__hip_cvt_float_to_fp8`|6.2.0| | | | |
+|`__nv_cvt_fp4_to_halfraw`|12.8| | | |`__hip_cvt_fp4_to_halfraw`|7.0.0| | | |7.0.0|
+|`__nv_cvt_fp4x2_to_halfraw2`|12.8| | | |`__hip_cvt_fp4x2_to_halfraw2`|7.0.0| | | |7.0.0|
+|`__nv_cvt_fp6_to_halfraw`|12.8| | | | | | | | | |
+|`__nv_cvt_fp6x2_to_halfraw2`|12.8| | | | | | | | | |
 |`__nv_cvt_fp8_to_halfraw`|11.8| | | |`__hip_cvt_fp8_to_halfraw`|6.2.0| | | | |
 |`__nv_cvt_fp8x2_to_halfraw2`|11.8| | | |`__hip_cvt_fp8x2_to_halfraw2`|6.2.0| | | | |
+|`__nv_cvt_halfraw2_to_fp4x2`|12.8| | | |`__hip_cvt_halfraw2_to_fp4x2`|7.0.0| | | |7.0.0|
+|`__nv_cvt_halfraw2_to_fp6x2`|12.8| | | | | | | | | |
 |`__nv_cvt_halfraw2_to_fp8x2`|11.8| | | |`__hip_cvt_halfraw2_to_fp8x2`|6.2.0| | | | |
+|`__nv_cvt_halfraw_to_fp4`|12.8| | | |`__hip_cvt_halfraw_to_fp4`|7.0.0| | | |7.0.0|
+|`__nv_cvt_halfraw_to_fp6`|12.8| | | | | | | | | |
 |`__nv_cvt_halfraw_to_fp8`|11.8| | | |`__hip_cvt_halfraw_to_fp8`|6.2.0| | | | |
+|`__nv_fp128_acos`|12.8| | | | | | | | | |
+|`__nv_fp128_acosh`|12.8| | | | | | | | | |
+|`__nv_fp128_add`|12.8| | | | | | | | | |
+|`__nv_fp128_asin`|12.8| | | | | | | | | |
+|`__nv_fp128_asinh`|12.8| | | | | | | | | |
+|`__nv_fp128_atan`|12.8| | | | | | | | | |
+|`__nv_fp128_atanh`|12.8| | | | | | | | | |
+|`__nv_fp128_ceil`|12.8| | | | | | | | | |
+|`__nv_fp128_copysign`|12.8| | | | | | | | | |
+|`__nv_fp128_cos`|12.8| | | | | | | | | |
+|`__nv_fp128_cosh`|12.8| | | | | | | | | |
+|`__nv_fp128_div`|12.8| | | | | | | | | |
+|`__nv_fp128_exp`|12.8| | | | | | | | | |
+|`__nv_fp128_exp10`|12.8| | | | | | | | | |
+|`__nv_fp128_exp2`|12.8| | | | | | | | | |
+|`__nv_fp128_expm1`|12.8| | | | | | | | | |
+|`__nv_fp128_fabs`|12.8| | | | | | | | | |
+|`__nv_fp128_fdim`|12.8| | | | | | | | | |
+|`__nv_fp128_floor`|12.8| | | | | | | | | |
+|`__nv_fp128_fma`|12.8| | | | | | | | | |
+|`__nv_fp128_fmax`|12.8| | | | | | | | | |
+|`__nv_fp128_fmin`|12.8| | | | | | | | | |
+|`__nv_fp128_fmod`|12.8| | | | | | | | | |
+|`__nv_fp128_frexp`|12.8| | | | | | | | | |
+|`__nv_fp128_hypot`|12.8| | | | | | | | | |
+|`__nv_fp128_ilogb`|12.8| | | | | | | | | |
+|`__nv_fp128_isnan`|12.8| | | | | | | | | |
+|`__nv_fp128_isunordered`|12.8| | | | | | | | | |
+|`__nv_fp128_ldexp`|12.8| | | | | | | | | |
+|`__nv_fp128_log`|12.8| | | | | | | | | |
+|`__nv_fp128_log10`|12.8| | | | | | | | | |
+|`__nv_fp128_log1p`|12.8| | | | | | | | | |
+|`__nv_fp128_log2`|12.8| | | | | | | | | |
+|`__nv_fp128_modf`|12.8| | | | | | | | | |
+|`__nv_fp128_mul`|12.8| | | | | | | | | |
+|`__nv_fp128_pow`|12.8| | | | | | | | | |
+|`__nv_fp128_remainder`|12.8| | | | | | | | | |
+|`__nv_fp128_rint`|12.8| | | | | | | | | |
+|`__nv_fp128_round`|12.8| | | | | | | | | |
+|`__nv_fp128_sin`|12.8| | | | | | | | | |
+|`__nv_fp128_sinh`|12.8| | | | | | | | | |
+|`__nv_fp128_sqrt`|12.8| | | | | | | | | |
+|`__nv_fp128_sub`|12.8| | | | | | | | | |
+|`__nv_fp128_tan`|12.8| | | | | | | | | |
+|`__nv_fp128_tanh`|12.8| | | | | | | | | |
+|`__nv_fp128_trunc`|12.8| | | | | | | | | |
 |`__pm0`| | | | | | | | | | |
 |`__pm1`| | | | | | | | | | |
 |`__pm2`| | | | | | | | | | |
@@ -665,6 +748,8 @@
 |`h2rsqrt`| | | | |`h2rsqrt`|1.6.0| | | | |
 |`h2sin`| | | | |`h2sin`|1.6.0| | | | |
 |`h2sqrt`| | | | |`h2sqrt`|1.6.0| | | | |
+|`h2tanh`|12.8| | | | | | | | | |
+|`h2tanh_approx`|12.8| | | | | | | | | |
 |`h2trunc`| | | | |`h2trunc`|1.6.0| | | | |
 |`hceil`| | | | |`hceil`|1.6.0| | | | |
 |`hcos`| | | | |`hcos`|1.6.0| | | | |
@@ -680,6 +765,8 @@
 |`hrsqrt`| | | | |`hrsqrt`|1.6.0| | | | |
 |`hsin`| | | | |`hsin`|1.6.0| | | | |
 |`hsqrt`| | | | |`hsqrt`|1.6.0| | | | |
+|`htanh`|12.8| | | | | | | | | |
+|`htanh_approx`|12.8| | | | | | | | | |
 |`htrunc`| | | | |`htrunc`|1.6.0| | | | |
 |`hypot`| | | | |`hypot`|1.6.0| | | | |
 |`hypotf`| | | | |`hypotf`|1.6.0| | | | |
@@ -813,6 +900,16 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`CUDART_INF_FP16`|12.2| | | |`HIPRT_INF_FP16`|7.0.0| | | |7.0.0|
+|`CUDART_MAX_NORMAL_FP16`|12.2| | | |`HIPRT_MAX_NORMAL_FP16`|7.0.0| | | |7.0.0|
+|`CUDART_MIN_DENORM_FP16`|12.2| | | |`HIPRT_MIN_DENORM_FP16`|7.0.0| | | |7.0.0|
+|`CUDART_NAN_FP16`|12.2| | | |`HIPRT_NAN_FP16`|7.0.0| | | |7.0.0|
+|`CUDART_NEG_ZERO_FP16`|12.2| | | |`HIPRT_NEG_ZERO_FP16`|7.0.0| | | |7.0.0|
+|`CUDART_ONE_FP16`|12.2| | | |`HIPRT_ONE_FP16`|7.0.0| | | |7.0.0|
+|`CUDART_ZERO_FP16`|12.2| | | |`HIPRT_ZERO_FP16`|7.0.0| | | |7.0.0|
+|`__NV_E2M1`|12.8| | | |`__HIP_E2M1`|7.0.0| | | |7.0.0|
+|`__NV_E2M3`|12.8| | | | | | | | | |
+|`__NV_E3M2`|12.8| | | | | | | | | |
 |`__NV_E4M3`|11.8| | | |`__HIP_E4M3_FNUZ`|6.2.0| | | | |
 |`__NV_E5M2`|11.8| | | |`__HIP_E5M2_FNUZ`|6.2.0| | | | |
 |`__NV_NOSAT`|11.8| | | |`__HIP_NOSAT`|6.2.0| | | | |
@@ -825,17 +922,42 @@
 |`__nv_bfloat162`|11.0| | | |`__hip_bfloat162`|5.7.0| | | | |
 |`__nv_bfloat162_raw`|11.0| | | |`__hip_bfloat162_raw`|6.2.0| | | | |
 |`__nv_bfloat16_raw`|11.0| | | |`__hip_bfloat16_raw`|6.2.0| | | | |
+|`__nv_fp4_e2m1`|12.8| | | |`__hip_fp4_e2m1`|7.0.0| | | |7.0.0|
+|`__nv_fp4_interpretation_t`|12.8| | | |`__hip_fp4_interpretation_t`|7.0.0| | | |7.0.0|
+|`__nv_fp4_storage_t`|12.8| | | |`__hip_fp4_storage_t`|7.0.0| | | |7.0.0|
+|`__nv_fp4x2_e2m1`|12.8| | | |`__hip_fp4x2_e2m1`|7.0.0| | | |7.0.0|
+|`__nv_fp4x2_storage_t`|12.8| | | |`__hip_fp4x2_storage_t`|7.0.0| | | |7.0.0|
+|`__nv_fp4x4_e2m1`|12.8| | | |`__hip_fp4x4_e2m1`|7.0.0| | | |7.0.0|
+|`__nv_fp4x4_storage_t`|12.8| | | |`__hip_fp4x4_storage_t`|7.0.0| | | |7.0.0|
+|`__nv_fp6_e2m3`|12.8| | | | | | | | | |
+|`__nv_fp6_e3m2`|12.8| | | | | | | | | |
+|`__nv_fp6_interpretation_t`|12.8| | | | | | | | | |
+|`__nv_fp6_storage_t`|12.8| | | | | | | | | |
+|`__nv_fp6x2_e2m3`|12.8| | | | | | | | | |
+|`__nv_fp6x2_e3m2`|12.8| | | | | | | | | |
+|`__nv_fp6x2_storage_t`|12.8| | | | | | | | | |
+|`__nv_fp6x4_e2m3`|12.8| | | | | | | | | |
+|`__nv_fp6x4_e3m2`|12.8| | | | | | | | | |
+|`__nv_fp6x4_storage_t`|12.8| | | | | | | | | |
 |`__nv_fp8_e4m3`|11.8| | | |`__hip_fp8_e4m3_fnuz`|6.2.0| | | | |
 |`__nv_fp8_e5m2`|11.8| | | |`__hip_fp8_e5m2_fnuz`|6.2.0| | | | |
+|`__nv_fp8_e8m0`|12.8| | | | | | | | | |
 |`__nv_fp8_interpretation_t`|11.8| | | |`__hip_fp8_interpretation_t`|6.2.0| | | | |
 |`__nv_fp8_storage_t`|11.8| | | |`__hip_fp8_storage_t`|6.2.0| | | | |
 |`__nv_fp8x2_e4m3`|11.8| | | |`__hip_fp8x2_e4m3_fnuz`|6.2.0| | | | |
 |`__nv_fp8x2_e5m2`|11.8| | | |`__hip_fp8x2_e5m2_fnuz`|6.2.0| | | | |
+|`__nv_fp8x2_e8m0`|12.8| | | | | | | | | |
 |`__nv_fp8x2_storage_t`|11.8| | | |`__hip_fp8x2_storage_t`|6.2.0| | | | |
 |`__nv_fp8x4_e4m3`|11.8| | | |`__hip_fp8x4_e4m3_fnuz`|6.2.0| | | | |
 |`__nv_fp8x4_e5m2`|11.8| | | |`__hip_fp8x4_e5m2_fnuz`|6.2.0| | | | |
+|`__nv_fp8x4_e8m0`|12.8| | | | | | | | | |
 |`__nv_fp8x4_storage_t`|11.8| | | |`__hip_fp8x4_storage_t`|6.2.0| | | | |
 |`__nv_saturation_t`|11.8| | | |`__hip_saturation_t`|6.2.0| | | | |
+|`cudaRoundMinInf`| | | | |`hipRoundMinInf`|7.0.0| | | |7.0.0|
+|`cudaRoundMode`| | | | |`hipRoundMode`|7.0.0| | | |7.0.0|
+|`cudaRoundNearest`| | | | |`hipRoundNearest`|7.0.0| | | |7.0.0|
+|`cudaRoundPosInf`| | | | |`hipRoundPosInf`|7.0.0| | | |7.0.0|
+|`cudaRoundZero`| | | | |`hipRoundZero`|7.0.0| | | |7.0.0|
 |`nv_bfloat16`|11.0| | | |`hip_bfloat16`|3.5.0| | | | |
 |`nv_bfloat162`|11.0| | | | | | | | | |
 

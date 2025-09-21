@@ -1,3 +1,9 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="NVIDIA CUDA APIs supported by HIPIFY">
+    <meta name="keywords" content="HIPIFY, HIP, ROCm, NVIDIA, CUDA, CUDA2HIP, hipification, hipify-clang, hipify-perl, Runtime API">
+</head>
+
 # CUDA Runtime API supported by HIP
 
 
@@ -20,7 +26,7 @@
 |`cudaDeviceGetP2PAttribute`|8.0| | | |`hipDeviceGetP2PAttribute`|3.8.0| | | | |
 |`cudaDeviceGetPCIBusId`| | | | |`hipDeviceGetPCIBusId`|1.6.0| | | | |
 |`cudaDeviceGetStreamPriorityRange`| | | | |`hipDeviceGetStreamPriorityRange`|2.0.0| | | | |
-|`cudaDeviceGetTexture1DLinearMaxWidth`|11.1| | | |`hipDeviceGetTexture1DLinearMaxWidth`|6.4.0| | | |6.4.0|
+|`cudaDeviceGetTexture1DLinearMaxWidth`|11.1| | | |`hipDeviceGetTexture1DLinearMaxWidth`|6.4.0| | | | |
 |`cudaDeviceReset`| | | | |`hipDeviceReset`|1.6.0| | | | |
 |`cudaDeviceSetCacheConfig`| | | | |`hipDeviceSetCacheConfig`|1.6.0| | | | |
 |`cudaDeviceSetLimit`| | | | |`hipDeviceSetLimit`|5.3.0| | | | |
@@ -85,6 +91,7 @@
 |`cudaStreamGetAttribute`|11.0| | | | | | | | | |
 |`cudaStreamGetCaptureInfo`|10.1| | | |`hipStreamGetCaptureInfo`|5.0.0| | | | |
 |`cudaStreamGetCaptureInfo_v3`|12.3| | | | | | | | | |
+|`cudaStreamGetDevice`|12.8| | | | | | | | | |
 |`cudaStreamGetFlags`| | | | |`hipStreamGetFlags`|1.6.0| | | | |
 |`cudaStreamGetId`|12.0| | | | | | | | | |
 |`cudaStreamGetPriority`| | | | |`hipStreamGetPriority`|2.0.0| | | | |
@@ -105,9 +112,10 @@
 |`cudaEventCreateWithFlags`| | | | |`hipEventCreateWithFlags`|1.6.0| | | | |
 |`cudaEventDestroy`| | | | |`hipEventDestroy`|1.6.0| | | | |
 |`cudaEventElapsedTime`| | | | |`hipEventElapsedTime`|1.6.0| | | | |
+|`cudaEventElapsedTime_v2`|12.8| | | | | | | | | |
 |`cudaEventQuery`| | | | |`hipEventQuery`|1.6.0| | | | |
 |`cudaEventRecord`| | | | |`hipEventRecord`|1.6.0| | | | |
-|`cudaEventRecordWithFlags`|11.1| | | |`hipEventRecordWithFlags`|6.4.0| | | |6.4.0|
+|`cudaEventRecordWithFlags`|11.1| | | |`hipEventRecordWithFlags`|6.4.0| | | | |
 |`cudaEventSynchronize`| | | | |`hipEventSynchronize`|1.6.0| | | | |
 
 ## **7. External Resource Interoperability**
@@ -138,7 +146,7 @@
 |`cudaLaunchCooperativeKernelMultiDevice`|9.0|11.3| | |`hipLaunchCooperativeKernelMultiDevice`|2.6.0| | | | |
 |`cudaLaunchHostFunc`|10.0| | | |`hipLaunchHostFunc`|5.2.0| | | | |
 |`cudaLaunchKernel`| | | | |`hipLaunchKernel`|1.6.0| | | | |
-|`cudaLaunchKernelExC`|11.8| | | | | | | | | |
+|`cudaLaunchKernelExC`|11.8| | | |`hipLaunchKernelExC`|7.0.0| | | |7.0.0|
 |`cudaSetDoubleForDevice`| |10.0| | | | | | | | |
 |`cudaSetDoubleForHost`| |10.0| | | | | | | | |
 
@@ -209,9 +217,11 @@
 |`cudaMemcpy2DToArrayAsync`| | | | |`hipMemcpy2DToArrayAsync`|4.3.0| | | | |
 |`cudaMemcpy3D`| | | | |`hipMemcpy3D`|1.6.0| | | | |
 |`cudaMemcpy3DAsync`| | | | |`hipMemcpy3DAsync`|2.8.0| | | | |
+|`cudaMemcpy3DBatchAsync`|12.8| | | | | | | | | |
 |`cudaMemcpy3DPeer`| | | | | | | | | | |
 |`cudaMemcpy3DPeerAsync`| | | | | | | | | | |
 |`cudaMemcpyAsync`| | | | |`hipMemcpyAsync`|1.6.0| | | | |
+|`cudaMemcpyBatchAsync`|12.8| | | | | | | | | |
 |`cudaMemcpyFromSymbol`| | | | |`hipMemcpyFromSymbol`|1.6.0| | | | |
 |`cudaMemcpyFromSymbolAsync`| | | | |`hipMemcpyFromSymbolAsync`|1.6.0| | | | |
 |`cudaMemcpyPeer`| | | | |`hipMemcpyPeer`|1.6.0| | | | |
@@ -531,26 +541,41 @@
 |`cudaGetDriverEntryPoint`|11.3| |12.0| |`hipGetProcAddress`|6.2.0| | | | |
 |`cudaGetDriverEntryPointByVersion`|12.5| | | | | | | | | |
 
-## **32. C++ API Routines**
+## **32. Library Management**
+
+|**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
+|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`cudaKernelSetAttributeForDevice`|12.8| | | | | | | | | |
+|`cudaLibraryEnumerateKernels`|12.8| | | | | | | | | |
+|`cudaLibraryGetGlobal`|12.8| | | | | | | | | |
+|`cudaLibraryGetKernel`|12.8| | | | | | | | | |
+|`cudaLibraryGetKernelCount`|12.8| | | | | | | | | |
+|`cudaLibraryGetManaged`|12.8| | | | | | | | | |
+|`cudaLibraryGetUnifiedFunction`|12.8| | | | | | | | | |
+|`cudaLibraryLoadData`|12.8| | | | | | | | | |
+|`cudaLibraryLoadFromFile`|12.8| | | | | | | | | |
+|`cudaLibraryUnload`|12.8| | | | | | | | | |
+
+## **33. C++ API Routines**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cudaGetKernel`|12.1| | | | | | | | | |
 
-## **33. Interactions with the CUDA Driver API**
+## **34. Interactions with the CUDA Driver API**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cudaGetFuncBySymbol`|11.0| | | |`hipGetFuncBySymbol`|6.2.0| | | | |
 
-## **34. Profiler Control**
+## **35. Profiler Control**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cudaProfilerStart`| | | | |`hipProfilerStart`|1.6.0|3.0.0| | | |
 |`cudaProfilerStop`| | | | |`hipProfilerStop`|1.6.0|3.0.0| | | |
 
-## **35. Data types used by CUDA Runtime**
+## **36. Data types used by CUDA Runtime**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
@@ -724,6 +749,7 @@
 |`cudaChannelFormatKindUnsignedBlockCompressed6H`|11.5| | | | | | | | | |
 |`cudaChannelFormatKindUnsignedBlockCompressed7`|11.5| | | | | | | | | |
 |`cudaChannelFormatKindUnsignedBlockCompressed7SRGB`|11.5| | | | | | | | | |
+|`cudaChannelFormatKindUnsignedNormalized1010102`|12.8| | | | | | | | | |
 |`cudaChannelFormatKindUnsignedNormalized16X1`|11.5| | | | | | | | | |
 |`cudaChannelFormatKindUnsignedNormalized16X2`|11.5| | | | | | | | | |
 |`cudaChannelFormatKindUnsignedNormalized16X4`|11.5| | | | | | | | | |
@@ -794,8 +820,12 @@
 |`cudaDevAttrGlobalL1CacheSupported`| | | | |`hipDeviceAttributeGlobalL1CacheSupported`|4.3.0| | | | |
 |`cudaDevAttrGlobalMemoryBusWidth`| | | | |`hipDeviceAttributeMemoryBusWidth`|1.6.0| | | | |
 |`cudaDevAttrGpuOverlap`| | | | |`hipDeviceAttributeAsyncEngineCount`|4.3.0| | | | |
+|`cudaDevAttrGpuPciDeviceId`|12.8| | | | | | | | | |
+|`cudaDevAttrGpuPciSubsystemId`|12.8| | | | | | | | | |
 |`cudaDevAttrHostNativeAtomicSupported`|8.0| | | |`hipDeviceAttributeHostNativeAtomicSupported`|4.3.0| | | | |
 |`cudaDevAttrHostNumaId`|12.2| | | | | | | | | |
+|`cudaDevAttrHostNumaMemoryPoolsSupported`|12.9| | | | | | | | | |
+|`cudaDevAttrHostNumaMultinodeIpcSupported`|12.8| | | | | | | | | |
 |`cudaDevAttrHostRegisterReadOnlySupported`|11.1| | | | | | | | | |
 |`cudaDevAttrHostRegisterSupported`|9.2| | | |`hipDeviceAttributeHostRegisterSupported`|6.0.0| | | | |
 |`cudaDevAttrIntegrated`| | | | |`hipDeviceAttributeIntegrated`|1.9.0| | | | |
@@ -877,7 +907,7 @@
 |`cudaDevAttrPageableMemoryAccessUsesHostPageTables`|9.2| | | |`hipDeviceAttributePageableMemoryAccessUsesHostPageTables`|3.10.0| | | | |
 |`cudaDevAttrPciBusId`| | | | |`hipDeviceAttributePciBusId`|1.6.0| | | | |
 |`cudaDevAttrPciDeviceId`| | | | |`hipDeviceAttributePciDeviceId`|1.6.0| | | | |
-|`cudaDevAttrPciDomainId`| | | | |`hipDeviceAttributePciDomainID`|4.3.0| | | | |
+|`cudaDevAttrPciDomainId`| | | | |`hipDeviceAttributePciDomainId`|4.3.0| | | | |
 |`cudaDevAttrReserved122`|12.0| | | | | | | | | |
 |`cudaDevAttrReserved123`|12.0| | | | | | | | | |
 |`cudaDevAttrReserved124`|12.0| | | | | | | | | |
@@ -885,6 +915,7 @@
 |`cudaDevAttrReserved128`|12.1| | | | | | | | | |
 |`cudaDevAttrReserved129`|12.1| | | | | | | | | |
 |`cudaDevAttrReserved132`|12.1| | | | | | | | | |
+|`cudaDevAttrReserved141`|12.9| | | | | | | | | |
 |`cudaDevAttrReserved92`|9.0| | | | | | | | | |
 |`cudaDevAttrReserved93`|9.0| | | | | | | | | |
 |`cudaDevAttrReserved94`|9.0| | | |`hipDeviceAttributeCanUseStreamWaitValue`|4.3.0| | | | |
@@ -899,6 +930,7 @@
 |`cudaDevAttrTimelineSemaphoreInteropSupported`|11.5| | | | | | | | | |
 |`cudaDevAttrTotalConstantMemory`| | | | |`hipDeviceAttributeTotalConstantMemory`|1.6.0| | | | |
 |`cudaDevAttrUnifiedAddressing`| | | | |`hipDeviceAttributeUnifiedAddressing`|4.3.0| | | | |
+|`cudaDevAttrVulkanCigSupported`|12.9| | | | | | | | | |
 |`cudaDevAttrWarpSize`| | | | |`hipDeviceAttributeWarpSize`|1.6.0| | | | |
 |`cudaDevP2PAttrAccessSupported`|8.0| | | |`hipDevP2PAttrAccessSupported`|3.8.0| | | | |
 |`cudaDevP2PAttrCudaArrayAccessSupported`|9.2| | | |`hipDevP2PAttrHipArrayAccessSupported`|3.8.0| | | | |
@@ -934,12 +966,18 @@
 |`cudaEglColorFormatBGR`|9.1| | | | | | | | | |
 |`cudaEglColorFormatBGRA`|9.1| | | | | | | | | |
 |`cudaEglColorFormatBayer10BGGR`|9.1| | | | | | | | | |
+|`cudaEglColorFormatBayer10CCCC`|11.1| | | | | | | | | |
 |`cudaEglColorFormatBayer10GBRG`|9.1| | | | | | | | | |
 |`cudaEglColorFormatBayer10GRBG`|9.1| | | | | | | | | |
 |`cudaEglColorFormatBayer10RGGB`|9.1| | | | | | | | | |
+|`cudaEglColorFormatBayer12BCCR`|11.1| | | | | | | | | |
 |`cudaEglColorFormatBayer12BGGR`|9.1| | | | | | | | | |
+|`cudaEglColorFormatBayer12CBRC`|11.1| | | | | | | | | |
+|`cudaEglColorFormatBayer12CCCC`|11.1| | | | | | | | | |
+|`cudaEglColorFormatBayer12CRBC`|11.1| | | | | | | | | |
 |`cudaEglColorFormatBayer12GBRG`|9.1| | | | | | | | | |
 |`cudaEglColorFormatBayer12GRBG`|9.1| | | | | | | | | |
+|`cudaEglColorFormatBayer12RCCB`|11.1| | | | | | | | | |
 |`cudaEglColorFormatBayer12RGGB`|9.1| | | | | | | | | |
 |`cudaEglColorFormatBayer14BGGR`|9.1| | | | | | | | | |
 |`cudaEglColorFormatBayer14GBRG`|9.1| | | | | | | | | |
@@ -949,29 +987,59 @@
 |`cudaEglColorFormatBayer20GBRG`|9.1| | | | | | | | | |
 |`cudaEglColorFormatBayer20GRBG`|9.1| | | | | | | | | |
 |`cudaEglColorFormatBayer20RGGB`|9.1| | | | | | | | | |
+|`cudaEglColorFormatBayerBCCR`|11.1| | | | | | | | | |
 |`cudaEglColorFormatBayerBGGR`|9.1| | | | | | | | | |
+|`cudaEglColorFormatBayerCBRC`|11.1| | | | | | | | | |
+|`cudaEglColorFormatBayerCRBC`|11.1| | | | | | | | | |
 |`cudaEglColorFormatBayerGBRG`|9.1| | | | | | | | | |
 |`cudaEglColorFormatBayerGRBG`|9.1| | | | | | | | | |
 |`cudaEglColorFormatBayerIspBGGR`|9.2| | | | | | | | | |
 |`cudaEglColorFormatBayerIspGBRG`|9.2| | | | | | | | | |
 |`cudaEglColorFormatBayerIspGRBG`|9.2| | | | | | | | | |
 |`cudaEglColorFormatBayerIspRGGB`|9.2| | | | | | | | | |
+|`cudaEglColorFormatBayerRCCB`|11.1| | | | | | | | | |
 |`cudaEglColorFormatBayerRGGB`|9.1| | | | | | | | | |
 |`cudaEglColorFormatL`|9.1| | | | | | | | | |
 |`cudaEglColorFormatR`|9.1| | | | | | | | | |
 |`cudaEglColorFormatRG`|9.1| | | | | | | | | |
 |`cudaEglColorFormatRGB`|9.1| | | | | | | | | |
 |`cudaEglColorFormatRGBA`|9.1| | | | | | | | | |
+|`cudaEglColorFormatUYVY2020`|12.8| | | | | | | | | |
 |`cudaEglColorFormatUYVY422`|9.1| | | | | | | | | |
+|`cudaEglColorFormatUYVY709`|12.8| | | | | | | | | |
+|`cudaEglColorFormatUYVY709_ER`|12.8| | | | | | | | | |
 |`cudaEglColorFormatUYVY_ER`|9.1| | | | | | | | | |
+|`cudaEglColorFormatVYUY`|11.4| | | | | | | | | |
 |`cudaEglColorFormatVYUY_ER`|9.1| | | | | | | | | |
+|`cudaEglColorFormatY`|11.2| | | | | | | | | |
 |`cudaEglColorFormatY10V10U10_420SemiPlanar`|9.1| | | | | | | | | |
+|`cudaEglColorFormatY10V10U10_420SemiPlanar_2020`|11.4| | | | | | | | | |
+|`cudaEglColorFormatY10V10U10_420SemiPlanar_709`|11.4| | | | | | | | | |
+|`cudaEglColorFormatY10V10U10_420SemiPlanar_709_ER`|11.4| | | | | | | | | |
+|`cudaEglColorFormatY10V10U10_420SemiPlanar_ER`|11.4| | | | | | | | | |
+|`cudaEglColorFormatY10V10U10_422SemiPlanar`|11.4| | | | | | | | | |
+|`cudaEglColorFormatY10V10U10_422SemiPlanar_2020`|11.4| | | | | | | | | |
+|`cudaEglColorFormatY10V10U10_422SemiPlanar_709`|11.4| | | | | | | | | |
 |`cudaEglColorFormatY10V10U10_444SemiPlanar`|9.1| | | | | | | | | |
+|`cudaEglColorFormatY10V10U10_444SemiPlanar_709_ER`|11.4| | | | | | | | | |
+|`cudaEglColorFormatY10V10U10_444SemiPlanar_ER`|11.4| | | | | | | | | |
+|`cudaEglColorFormatY10_709_ER`|11.4| | | | | | | | | |
+|`cudaEglColorFormatY10_ER`|11.4| | | | | | | | | |
 |`cudaEglColorFormatY12V12U12_420SemiPlanar`|9.1| | | | | | | | | |
+|`cudaEglColorFormatY12V12U12_420SemiPlanar_709_ER`|11.4| | | | | | | | | |
+|`cudaEglColorFormatY12V12U12_420SemiPlanar_ER`|11.4| | | | | | | | | |
 |`cudaEglColorFormatY12V12U12_444SemiPlanar`|9.1| | | | | | | | | |
+|`cudaEglColorFormatY12V12U12_444SemiPlanar_709_ER`|11.4| | | | | | | | | |
+|`cudaEglColorFormatY12V12U12_444SemiPlanar_ER`|11.4| | | | | | | | | |
+|`cudaEglColorFormatY12_709_ER`|11.4| | | | | | | | | |
+|`cudaEglColorFormatY12_ER`|11.4| | | | | | | | | |
 |`cudaEglColorFormatYUV420Planar`|9.1| | | | | | | | | |
+|`cudaEglColorFormatYUV420Planar_2020`|11.4| | | | | | | | | |
+|`cudaEglColorFormatYUV420Planar_709`|11.4| | | | | | | | | |
 |`cudaEglColorFormatYUV420Planar_ER`|9.1| | | | | | | | | |
 |`cudaEglColorFormatYUV420SemiPlanar`|9.1| | | | | | | | | |
+|`cudaEglColorFormatYUV420SemiPlanar_2020`|11.4| | | | | | | | | |
+|`cudaEglColorFormatYUV420SemiPlanar_709`|11.4| | | | | | | | | |
 |`cudaEglColorFormatYUV420SemiPlanar_ER`|9.1| | | | | | | | | |
 |`cudaEglColorFormatYUV422Planar`|9.1| | | | | | | | | |
 |`cudaEglColorFormatYUV422Planar_ER`|9.1| | | | | | | | | |
@@ -981,13 +1049,18 @@
 |`cudaEglColorFormatYUV444Planar_ER`|9.1| | | | | | | | | |
 |`cudaEglColorFormatYUV444SemiPlanar`|9.1| | | | | | | | | |
 |`cudaEglColorFormatYUV444SemiPlanar_ER`|9.1| | | | | | | | | |
+|`cudaEglColorFormatYUVA`|11.4| | | | | | | | | |
 |`cudaEglColorFormatYUVA_ER`|9.1| | | | | | | | | |
 |`cudaEglColorFormatYUV_ER`|9.1| | | | | | | | | |
 |`cudaEglColorFormatYUYV422`|9.1| | | | | | | | | |
 |`cudaEglColorFormatYUYV_ER`|9.1| | | | | | | | | |
 |`cudaEglColorFormatYVU420Planar`|9.1| | | | | | | | | |
+|`cudaEglColorFormatYVU420Planar_2020`|11.4| | | | | | | | | |
+|`cudaEglColorFormatYVU420Planar_709`|11.4| | | | | | | | | |
 |`cudaEglColorFormatYVU420Planar_ER`|9.1| | | | | | | | | |
 |`cudaEglColorFormatYVU420SemiPlanar`|9.1| | | | | | | | | |
+|`cudaEglColorFormatYVU420SemiPlanar_2020`|11.4| | | | | | | | | |
+|`cudaEglColorFormatYVU420SemiPlanar_709`|11.4| | | | | | | | | |
 |`cudaEglColorFormatYVU420SemiPlanar_ER`|9.1| | | | | | | | | |
 |`cudaEglColorFormatYVU422Planar`|9.1| | | | | | | | | |
 |`cudaEglColorFormatYVU422Planar_ER`|9.1| | | | | | | | | |
@@ -997,7 +1070,10 @@
 |`cudaEglColorFormatYVU444Planar_ER`|9.1| | | | | | | | | |
 |`cudaEglColorFormatYVU444SemiPlanar`|9.1| | | | | | | | | |
 |`cudaEglColorFormatYVU444SemiPlanar_ER`| | | | | | | | | | |
+|`cudaEglColorFormatYVYU`|11.4| | | | | | | | | |
 |`cudaEglColorFormatYVYU_ER`|9.1| | | | | | | | | |
+|`cudaEglColorFormatY_709_ER`|11.4| | | | | | | | | |
+|`cudaEglColorFormatY_ER`|11.4| | | | | | | | | |
 |`cudaEglFrame`|9.1| | | | | | | | | |
 |`cudaEglFrameType`|9.1| | | | | | | | | |
 |`cudaEglFrameTypeArray`|9.1| | | | | | | | | |
@@ -1024,6 +1100,7 @@
 |`cudaErrorCdpNotSupported`|12.0| | | | | | | | | |
 |`cudaErrorCdpVersionMismatch`|12.0| | | | | | | | | |
 |`cudaErrorCompatNotSupportedOnDevice`|10.1| | | | | | | | | |
+|`cudaErrorContained`|12.8| | | | | | | | | |
 |`cudaErrorContextIsDestroyed`|10.1| | | |`hipErrorContextIsDestroyed`|4.3.0| | | | |
 |`cudaErrorCooperativeLaunchTooLarge`|9.0| | | |`hipErrorCooperativeLaunchTooLarge`|3.2.0| | | | |
 |`cudaErrorCudartUnloading`| | | | |`hipErrorDeinitialized`|1.6.0| | | | |
@@ -1049,7 +1126,7 @@
 |`cudaErrorInitializationError`| | | | |`hipErrorNotInitialized`|1.6.0| | | | |
 |`cudaErrorInsufficientDriver`| | | | |`hipErrorInsufficientDriver`|1.7.0| | | | |
 |`cudaErrorInvalidAddressSpace`| | | | | | | | | | |
-|`cudaErrorInvalidChannelDescriptor`| | | | |`hipErrorInvalidChannelDescriptor`|6.4.0| | | |6.4.0|
+|`cudaErrorInvalidChannelDescriptor`| | | | |`hipErrorInvalidChannelDescriptor`|6.4.0| | | | |
 |`cudaErrorInvalidClusterSize`|11.8| | | | | | | | | |
 |`cudaErrorInvalidConfiguration`| | | | |`hipErrorInvalidConfiguration`|1.6.0| | | | |
 |`cudaErrorInvalidDevice`| | | | |`hipErrorInvalidDevice`|1.6.0| | | | |
@@ -1070,7 +1147,7 @@
 |`cudaErrorInvalidSource`|10.1| | | |`hipErrorInvalidSource`|1.6.0| | | | |
 |`cudaErrorInvalidSurface`| | | | | | | | | | |
 |`cudaErrorInvalidSymbol`| | | | |`hipErrorInvalidSymbol`|1.6.0| | | | |
-|`cudaErrorInvalidTexture`| | | | |`hipErrorInvalidTexture`|6.4.0| | | |6.4.0|
+|`cudaErrorInvalidTexture`| | | | |`hipErrorInvalidTexture`|6.4.0| | | | |
 |`cudaErrorInvalidTextureBinding`| | | | | | | | | | |
 |`cudaErrorInvalidValue`| | | | |`hipErrorInvalidValue`|1.6.0| | | | |
 |`cudaErrorJitCompilationDisabled`|11.2| | | | | | | | | |
@@ -1134,6 +1211,7 @@
 |`cudaErrorSynchronizationError`| |3.1| | | | | | | | |
 |`cudaErrorSystemDriverMismatch`|10.1| | | | | | | | | |
 |`cudaErrorSystemNotReady`|10.0| | | | | | | | | |
+|`cudaErrorTensorMemoryLeak`|12.8| | | | | | | | | |
 |`cudaErrorTextureFetchFailed`| |3.1| | | | | | | | |
 |`cudaErrorTextureNotBound`| |3.1| | | | | | | | |
 |`cudaErrorTimeout`|10.2| | | | | | | | | |
@@ -1149,8 +1227,8 @@
 |`cudaEventDefault`| | | | |`hipEventDefault`|1.6.0| | | | |
 |`cudaEventDisableTiming`| | | | |`hipEventDisableTiming`|1.6.0| | | | |
 |`cudaEventInterprocess`| | | | |`hipEventInterprocess`|1.6.0| | | | |
-|`cudaEventRecordDefault`|11.1| | | | | | | | | |
-|`cudaEventRecordExternal`|11.1| | | | | | | | | |
+|`cudaEventRecordDefault`|11.1| | | |`hipEventRecordDefault`|6.4.0| | | | |
+|`cudaEventRecordExternal`|11.1| | | |`hipEventRecordExternal`|6.4.0| | | | |
 |`cudaEventRecordNodeParams`|12.2| | | |`hipEventRecordNodeParams`|6.1.0| | | | |
 |`cudaEventWaitDefault`|11.1| | | | | | | | | |
 |`cudaEventWaitExternal`| | | | | | | | | | |
@@ -1236,8 +1314,12 @@
 |`cudaGPUDirectRDMAWritesOrderingNone`|11.3| | | |`hipGPUDirectRDMAWritesOrderingNone`|6.1.0| | | | |
 |`cudaGPUDirectRDMAWritesOrderingOwner`|11.3| | | |`hipGPUDirectRDMAWritesOrderingOwner`|6.1.0| | | | |
 |`cudaGetDriverEntryPointFlags`|11.3| | | | | | | | | |
+|`cudaGraphChildGraphNodeOwnership`|12.9| | | | | | | | | |
+|`cudaGraphChildGraphOwnershipClone`|12.9| | | | | | | | | |
+|`cudaGraphChildGraphOwnershipMove`|12.9| | | | | | | | | |
 |`cudaGraphCondAssignDefault`|12.3| | | | | | | | | |
 |`cudaGraphCondTypeIf`|12.3| | | | | | | | | |
+|`cudaGraphCondTypeSwitch`|12.8| | | | | | | | | |
 |`cudaGraphCondTypeWhile`|12.3| | | | | | | | | |
 |`cudaGraphConditionalHandle`|12.3| | | | | | | | | |
 |`cudaGraphConditionalHandleFlags`|12.3| | | | | | | | | |
@@ -1274,6 +1356,7 @@
 |`cudaGraphExecUpdateResultInfo_st`|12.0| | | | | | | | | |
 |`cudaGraphExecUpdateSuccess`|10.2| | | |`hipGraphExecUpdateSuccess`|4.3.0| | | | |
 |`cudaGraphExec_t`|10.0| | | |`hipGraphExec_t`|4.3.0| | | | |
+|`cudaGraphInstantiateConditionalHandleUnused`|12.8| | | | | | | | | |
 |`cudaGraphInstantiateError`|12.0| | | |`hipGraphInstantiateError`|6.2.0| | | | |
 |`cudaGraphInstantiateFlagAutoFreeOnLaunch`|11.4| | | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | | | |
 |`cudaGraphInstantiateFlagDeviceLaunch`|12.0| | | |`hipGraphInstantiateFlagDeviceLaunch`|5.6.0| | | | |
@@ -1358,6 +1441,29 @@
 |`cudaIpcMemHandle_st`| | | | |`hipIpcMemHandle_st`|1.6.0| | | | |
 |`cudaIpcMemHandle_t`| | | | |`hipIpcMemHandle_t`|1.6.0| | | | |
 |`cudaIpcMemLazyEnablePeerAccess`| | | | |`hipIpcMemLazyEnablePeerAccess`|1.6.0| | | | |
+|`cudaJitCacheMode`|12.8| | | |`hipJitOptionCacheMode`|6.4.0| | | | |
+|`cudaJitCacheOptionCA`|12.8| | | | | | | | | |
+|`cudaJitCacheOptionCG`|12.8| | | | | | | | | |
+|`cudaJitCacheOptionNone`|12.8| | | | | | | | | |
+|`cudaJitErrorLogBuffer`|12.8| | | |`hipJitOptionErrorLogBuffer`|6.4.0| | | | |
+|`cudaJitErrorLogBufferSizeBytes`|12.8| | | |`hipJitOptionErrorLogBufferSizeBytes`|6.4.0| | | | |
+|`cudaJitFallbackStrategy`|12.8| | | |`hipJitOptionFallbackStrategy`|6.4.0| | | | |
+|`cudaJitGenerateDebugInfo`|12.8| | | |`hipJitOptionGenerateDebugInfo`|6.4.0| | | | |
+|`cudaJitGenerateLineInfo`|12.8| | | |`hipJitOptionGenerateLineInfo`|6.4.0| | | | |
+|`cudaJitInfoLogBuffer`|12.8| | | |`hipJitOptionInfoLogBuffer`|6.4.0| | | | |
+|`cudaJitInfoLogBufferSizeBytes`|12.8| | | |`hipJitOptionInfoLogBufferSizeBytes`|6.4.0| | | | |
+|`cudaJitLogVerbose`|12.8| | | |`hipJitOptionLogVerbose`|6.4.0| | | | |
+|`cudaJitMaxRegisters`|12.8| | | |`hipJitOptionMaxRegisters`|6.4.0| | | | |
+|`cudaJitMaxThreadsPerBlock`|12.8| | | |`hipJitOptionMaxThreadsPerBlock`|6.4.0| | | | |
+|`cudaJitMinCtaPerSm`|12.8| | | |`hipJitOptionMinCTAPerSM`|6.4.0| | | | |
+|`cudaJitOptimizationLevel`|12.8| | | |`hipJitOptionOptimizationLevel`|6.4.0| | | | |
+|`cudaJitOption`|12.8| | | |`hipJitOption`|1.6.0| | | | |
+|`cudaJitOverrideDirectiveValues`|12.8| | | |`hipJitOptionOverrideDirectiveValues`|6.4.0| | | | |
+|`cudaJitPositionIndependentCode`|12.8| | | |`hipJitOptionPositionIndependentCode`|6.4.0| | | | |
+|`cudaJitThreadsPerBlock`|12.8| | | |`hipJitOptionThreadsPerBlock`|6.4.0| | | | |
+|`cudaJitWallTime`|12.8| | | |`hipJitOptionWallTime`|6.4.0| | | | |
+|`cudaJit_CacheMode`|12.8| | | | | | | | | |
+|`cudaJit_Fallback`|12.8| | | | | | | | | |
 |`cudaKernelNodeAttrID`|11.0| | | |`hipKernelNodeAttrID`|5.2.0| | | | |
 |`cudaKernelNodeAttrValue`|11.0| | | |`hipKernelNodeAttrValue`|5.2.0| | | | |
 |`cudaKernelNodeAttributeAccessPolicyWindow`|11.0| | | |`hipKernelNodeAttributeAccessPolicyWindow`|5.2.0| | | | |
@@ -1373,7 +1479,7 @@
 |`cudaKernelNodeParamsV2`|12.2| | | | | | | | | |
 |`cudaKernel_t`|12.1| | | | | | | | | |
 |`cudaKeyValuePair`| | | |12.0| | | | | | |
-|`cudaLaunchAttribute`|11.8| | | | | | | | | |
+|`cudaLaunchAttribute`|11.8| | | |`hipLaunchAttribute`|7.0.0| | | |7.0.0|
 |`cudaLaunchAttributeAccessPolicyWindow`|11.8| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | | |
 |`cudaLaunchAttributeClusterDimension`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeClusterSchedulingPolicyPreference`|11.8| | | | | | | | | |
@@ -1384,21 +1490,26 @@
 |`cudaLaunchAttributeLaunchCompletionEvent`|12.3| | | | | | | | | |
 |`cudaLaunchAttributeMemSyncDomain`|12.0| | | | | | | | | |
 |`cudaLaunchAttributeMemSyncDomainMap`|12.0| | | | | | | | | |
+|`cudaLaunchAttributePreferredClusterDimension`|12.8| | | | | | | | | |
 |`cudaLaunchAttributePreferredSharedMemoryCarveout`|12.5| | | | | | | | | |
 |`cudaLaunchAttributePriority`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | | |
 |`cudaLaunchAttributeProgrammaticEvent`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeProgrammaticStreamSerialization`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeSynchronizationPolicy`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeValue`|11.8| | | |`hipLaunchAttributeValue`|6.2.0| | | | |
-|`cudaLaunchAttribute_st`|11.8| | | | | | | | | |
-|`cudaLaunchConfig_st`|11.8| | | | | | | | | |
-|`cudaLaunchConfig_t`|11.8| | | | | | | | | |
+|`cudaLaunchAttribute_st`|11.8| | | |`hipLaunchAttribute_st`|7.0.0| | | |7.0.0|
+|`cudaLaunchConfig_st`|11.8| | | |`hipLaunchConfig_st`|7.0.0| | | |7.0.0|
+|`cudaLaunchConfig_t`|11.8| | | |`hipLaunchConfig_t`|7.0.0| | | |7.0.0|
 |`cudaLaunchMemSyncDomain`|12.0| | | | | | | | | |
 |`cudaLaunchMemSyncDomainDefault`|12.0| | | | | | | | | |
 |`cudaLaunchMemSyncDomainMap`|12.0| | | | | | | | | |
 |`cudaLaunchMemSyncDomainMap_st`|12.0| | | | | | | | | |
 |`cudaLaunchMemSyncDomainRemote`|12.0| | | | | | | | | |
 |`cudaLaunchParams`|9.0| | | |`hipLaunchParams`|2.6.0| | | | |
+|`cudaLibraryBinaryIsPreserved`|12.8| | | | | | | | | |
+|`cudaLibraryHostUniversalFunctionAndDataTable`|12.8| | | | | | | | | |
+|`cudaLibraryOption`|12.8| | | | | | | | | |
+|`cudaLibrary_t`|12.8| | | | | | | | | |
 |`cudaLimit`| | | | |`hipLimit_t`|1.6.0| | | | |
 |`cudaLimitDevRuntimePendingLaunchCount`| | | | | | | | | | |
 |`cudaLimitDevRuntimeSyncDepth`| | | | | | | | | | |
@@ -1449,6 +1560,7 @@
 |`cudaMemPoolAttrReservedMemHigh`|11.3| | | |`hipMemPoolAttrReservedMemHigh`|5.2.0| | | | |
 |`cudaMemPoolAttrUsedMemCurrent`|11.3| | | |`hipMemPoolAttrUsedMemCurrent`|5.2.0| | | | |
 |`cudaMemPoolAttrUsedMemHigh`|11.3| | | |`hipMemPoolAttrUsedMemHigh`|5.2.0| | | | |
+|`cudaMemPoolCreateUsageHwDecompress`|12.8| | | | | | | | | |
 |`cudaMemPoolProps`|11.2| | | |`hipMemPoolProps`|5.2.0| | | | |
 |`cudaMemPoolPtrExportData`|11.2| | | |`hipMemPoolPtrExportData`|5.2.0| | | | |
 |`cudaMemPoolReuseAllowInternalDependencies`|11.2| | | |`hipMemPoolReuseAllowInternalDependencies`|5.2.0| | | | |
@@ -1464,15 +1576,31 @@
 |`cudaMemRangeAttributePreferredLocationId`|12.2| | | | | | | | | |
 |`cudaMemRangeAttributePreferredLocationType`|12.2| | | | | | | | | |
 |`cudaMemRangeAttributeReadMostly`|8.0| | | |`hipMemRangeAttributeReadMostly`|3.7.0| | | | |
+|`cudaMemcpy3DBatchOp`|12.8| | | | | | | | | |
+|`cudaMemcpy3DOperand`|12.8| | | | | | | | | |
+|`cudaMemcpy3DOperandType`|12.8| | | | | | | | | |
 |`cudaMemcpy3DParms`| | | | |`hipMemcpy3DParms`|1.7.0| | | | |
 |`cudaMemcpy3DPeerParms`| | | | | | | | | | |
+|`cudaMemcpyAttributes`|12.8| | | | | | | | | |
 |`cudaMemcpyDefault`| | | | |`hipMemcpyDefault`|1.5.0| | | | |
 |`cudaMemcpyDeviceToDevice`| | | | |`hipMemcpyDeviceToDevice`|1.5.0| | | | |
 |`cudaMemcpyDeviceToHost`| | | | |`hipMemcpyDeviceToHost`|1.5.0| | | | |
+|`cudaMemcpyFlagDefault`|12.8| | | | | | | | | |
+|`cudaMemcpyFlagPreferOverlapWithCompute`|12.8| | | | | | | | | |
+|`cudaMemcpyFlags`|12.8| | | | | | | | | |
 |`cudaMemcpyHostToDevice`| | | | |`hipMemcpyHostToDevice`|1.5.0| | | | |
 |`cudaMemcpyHostToHost`| | | | |`hipMemcpyHostToHost`|1.5.0| | | | |
 |`cudaMemcpyKind`| | | | |`hipMemcpyKind`|1.5.0| | | | |
 |`cudaMemcpyNodeParams`|12.2| | | |`hipMemcpyNodeParams`|6.1.0| | | | |
+|`cudaMemcpyOperandTypeArray`|12.8| | | | | | | | | |
+|`cudaMemcpyOperandTypeMax`|12.8| | | | | | | | | |
+|`cudaMemcpyOperandTypePointer`|12.8| | | | | | | | | |
+|`cudaMemcpySrcAccessOrder`|12.8| | | | | | | | | |
+|`cudaMemcpySrcAccessOrderAny`|12.8| | | | | | | | | |
+|`cudaMemcpySrcAccessOrderDuringApiCall`|12.8| | | | | | | | | |
+|`cudaMemcpySrcAccessOrderInvalid`|12.8| | | | | | | | | |
+|`cudaMemcpySrcAccessOrderMax`|12.8| | | | | | | | | |
+|`cudaMemcpySrcAccessOrderStream`|12.8| | | | | | | | | |
 |`cudaMemoryAdvise`|8.0| | | |`hipMemoryAdvise`|3.7.0| | | | |
 |`cudaMemoryType`| | | | |`hipMemoryType`|1.6.0| | | | |
 |`cudaMemoryTypeDevice`| | | | |`hipMemoryTypeDevice`|1.6.0| | | | |
@@ -1488,11 +1616,14 @@
 |`cudaNvSciSyncAttrWait`|10.2| | | | | | | | | |
 |`cudaOccupancyDefault`| | | | |`hipOccupancyDefault`|3.2.0| | | | |
 |`cudaOccupancyDisableCachingOverride`| | | | |`hipOccupancyDisableCachingOverride`|5.5.0| | | | |
+|`cudaOffset3D`|12.8| | | | | | | | | |
 |`cudaOutputMode`| | | |12.0| | | | | | |
 |`cudaOutputMode_t`| | | |12.0| | | | | | |
 |`cudaPitchedPtr`| | | | |`hipPitchedPtr`|1.7.0| | | | |
 |`cudaPointerAttributes`| | | | |`hipPointerAttribute_t`|1.6.0| | | | |
 |`cudaPos`| | | | |`hipPos`|1.7.0| | | | |
+|`cudaPreferBinary`|12.8| | | | | | | | | |
+|`cudaPreferPtx`|12.8| | | | | | | | | |
 |`cudaReadModeElementType`| | | | |`hipReadModeElementType`|1.6.0| | | | |
 |`cudaReadModeNormalizedFloat`| | | | |`hipReadModeNormalizedFloat`|1.7.0| | | | |
 |`cudaResViewFormatFloat1`| | | | |`hipResViewFormatFloat1`|1.7.0| | | | |
@@ -1596,13 +1727,14 @@
 |`cudaUserObjectNoDestructorSync`|11.3| | | |`hipUserObjectNoDestructorSync`|5.3.0| | | | |
 |`cudaUserObjectRetainFlags`|11.3| | | |`hipUserObjectRetainFlags`|5.3.0| | | | |
 |`cudaUserObject_t`|11.3| | | |`hipUserObject_t`|5.3.0| | | | |
+|`cudalibraryHostUniversalFunctionAndDataTable`|12.8| | | | | | | | | |
 |`libraryPropertyType`|8.0| | | | | | | | | |
 |`libraryPropertyType_t`|8.0| | | | | | | | | |
 |`surfaceReference`| | | |12.0|`surfaceReference`|1.9.0| | | | |
 |`texture`| | | |12.0|`texture`| | | | | |
 |`textureReference`| | | | |`textureReference`|1.6.0| | | | |
 
-## **36. Execution Control [REMOVED]**
+## **37. Execution Control [REMOVED]**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
@@ -1610,7 +1742,7 @@
 |`cudaLaunch`| | | |10.1|`hipLaunchByPtr`|1.9.0| | | | |
 |`cudaSetupArgument`| | | |10.1|`hipSetupArgument`|1.9.0| | | | |
 
-## **37. Texture Reference Management [REMOVED]**
+## **38. Texture Reference Management [REMOVED]**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
@@ -1622,14 +1754,14 @@
 |`cudaGetTextureReference`| |11.0| |12.0|`hipGetTextureReference`|1.7.0|5.3.0| | | |
 |`cudaUnbindTexture`| |11.0| |12.0|`hipUnbindTexture`|1.6.0|3.8.0| | | |
 
-## **38. Surface Reference Management [REMOVED]**
+## **39. Surface Reference Management [REMOVED]**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cudaBindSurfaceToArray`| |11.0| |12.0| | | | | | |
 |`cudaGetSurfaceReference`| |11.0| |12.0| | | | | | |
 
-## **39. Profiler Control [REMOVED]**
+## **40. Profiler Control [REMOVED]**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|

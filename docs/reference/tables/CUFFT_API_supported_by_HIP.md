@@ -1,3 +1,9 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="NVIDIA CUDA APIs supported by HIPIFY">
+    <meta name="keywords" content="HIPIFY, HIP, ROCm, NVIDIA, CUDA, CUDA2HIP, hipification, hipify-clang, hipify-perl, FFT, cuFFT, cuFFTXt, hipFFT, hipFFTXt">
+</head>
+
 # CUFFT API supported by HIP
 
 
@@ -22,13 +28,13 @@
 |`CUFFT_CB_UNDEFINED`| | | | |`HIPFFT_CB_UNDEFINED`|4.3.0| | | | |
 |`CUFFT_COMPATIBILITY_DEFAULT`| | | | | | | | | | |
 |`CUFFT_COMPATIBILITY_FFTW_PADDING`| | | | | | | | | | |
-|`CUFFT_COPY_DEVICE_TO_DEVICE`| | | | | | | | | | |
-|`CUFFT_COPY_DEVICE_TO_HOST`| | | | | | | | | | |
-|`CUFFT_COPY_HOST_TO_DEVICE`| | | | | | | | | | |
-|`CUFFT_COPY_UNDEFINED`| | | | | | | | | | |
+|`CUFFT_COPY_DEVICE_TO_DEVICE`| | | | |`HIPFFT_COPY_DEVICE_TO_DEVICE`|6.0.0| | | | |
+|`CUFFT_COPY_DEVICE_TO_HOST`| | | | |`HIPFFT_COPY_DEVICE_TO_HOST`|6.0.0| | | | |
+|`CUFFT_COPY_HOST_TO_DEVICE`| | | | |`HIPFFT_COPY_HOST_TO_DEVICE`|6.0.0| | | | |
+|`CUFFT_COPY_UNDEFINED`| | | | |`HIPFFT_COPY_UNDEFINED`|6.0.0| | | | |
 |`CUFFT_D2Z`| | | | |`HIPFFT_D2Z`|1.7.0| | | | |
 |`CUFFT_EXEC_FAILED`| | | | |`HIPFFT_EXEC_FAILED`|1.7.0| | | | |
-|`CUFFT_FORMAT_UNDEFINED`| | | | | | | | | | |
+|`CUFFT_FORMAT_UNDEFINED`| | | | |`HIPFFT_FORMAT_UNDEFINED`|6.0.0| | | | |
 |`CUFFT_FORWARD`| | | | |`HIPFFT_FORWARD`|1.7.0| | | | |
 |`CUFFT_INCOMPLETE_PARAMETER_LIST`| | | | |`HIPFFT_INCOMPLETE_PARAMETER_LIST`|1.7.0| | | | |
 |`CUFFT_INTERNAL_ERROR`| | | | |`HIPFFT_INTERNAL_ERROR`|1.7.0| | | | |
@@ -52,18 +58,20 @@
 |`CUFFT_WORKAREA_MINIMAL`|9.2| | | | | | | | | |
 |`CUFFT_WORKAREA_PERFORMANCE`| | | | | | | | | | |
 |`CUFFT_WORKAREA_USER`|9.2| | | | | | | | | |
-|`CUFFT_XT_FORMAT_1D_INPUT_SHUFFLED`| | | | | | | | | | |
+|`CUFFT_XT_FORMAT_1D_INPUT_SHUFFLED`| | | | |`HIPFFT_XT_FORMAT_1D_INPUT_SHUFFLED`|6.0.0| | | | |
 |`CUFFT_XT_FORMAT_DISTRIBUTED_INPUT`|11.8| | | | | | | | | |
 |`CUFFT_XT_FORMAT_DISTRIBUTED_OUTPUT`|11.8| | | | | | | | | |
-|`CUFFT_XT_FORMAT_INPLACE`| | | | | | | | | | |
-|`CUFFT_XT_FORMAT_INPLACE_SHUFFLED`| | | | | | | | | | |
-|`CUFFT_XT_FORMAT_INPUT`| | | | | | | | | | |
-|`CUFFT_XT_FORMAT_OUTPUT`| | | | | | | | | | |
+|`CUFFT_XT_FORMAT_INPLACE`| | | | |`HIPFFT_XT_FORMAT_INPLACE`|6.0.0| | | | |
+|`CUFFT_XT_FORMAT_INPLACE_SHUFFLED`| | | | |`HIPFFT_XT_FORMAT_INPLACE_SHUFFLED`|6.0.0| | | | |
+|`CUFFT_XT_FORMAT_INPUT`| | | | |`HIPFFT_XT_FORMAT_INPUT`|6.0.0| | | | |
+|`CUFFT_XT_FORMAT_OUTPUT`| | | | |`HIPFFT_XT_FORMAT_OUTPUT`|6.0.0| | | | |
 |`CUFFT_Z2D`| | | | |`HIPFFT_Z2D`|1.7.0| | | | |
 |`CUFFT_Z2Z`| | | | |`HIPFFT_Z2Z`|1.7.0| | | | |
 |`MAX_CUFFT_ERROR`| | | | | | | | | | |
 |`NVFFT_PLAN_PROPERTY_INT64_MAX_NUM_HOST_THREADS`|12.5| | | | | | | | | |
 |`NVFFT_PLAN_PROPERTY_INT64_PATIENT_JIT`|12.4| | | | | | | | | |
+|`cudaLibXtDesc`| | | | |`hipLibXtDesc`|6.0.0| | | | |
+|`cudaLibXtDesc_t`| | | | |`hipLibXtDesc_t`|6.0.0| | | | |
 |`cufftBox3d`|11.8| | | | | | | | | |
 |`cufftBox3d_t`|11.8| | | | | | | | | |
 |`cufftCompatibility`| | | | | | | | | | |
@@ -83,12 +91,12 @@
 |`cufftXt1dFactors_t`| | | | | | | | | | |
 |`cufftXtCallbackType`| | | | |`hipfftXtCallbackType`|4.3.0| | | | |
 |`cufftXtCallbackType_t`| | | | |`hipfftXtCallbackType_t`|4.3.0| | | | |
-|`cufftXtCopyType`| | | | | | | | | | |
-|`cufftXtCopyType_t`| | | | | | | | | | |
+|`cufftXtCopyType`| | | | |`hipfftXtCopyType`|6.0.0| | | | |
+|`cufftXtCopyType_t`| | | | |`hipfftXtCopyType_t`|6.0.0| | | | |
 |`cufftXtQueryType`| | | | | | | | | | |
 |`cufftXtQueryType_t`| | | | | | | | | | |
-|`cufftXtSubFormat`| | | | | | | | | | |
-|`cufftXtSubFormat_t`| | | | | | | | | | |
+|`cufftXtSubFormat`| | | | |`hipfftXtSubFormat`|6.0.0| | | | |
+|`cufftXtSubFormat_t`| | | | |`hipfftXtSubFormat_t`|6.0.0| | | | |
 |`cufftXtWorkAreaPolicy`|9.2| | | | | | | | | |
 |`cufftXtWorkAreaPolicy_t`|9.2| | | | | | | | | |
 
@@ -140,24 +148,24 @@
 |`cufftSetStream`| | | | |`hipfftSetStream`|1.7.0| | | | |
 |`cufftSetWorkArea`| | | | |`hipfftSetWorkArea`|1.7.0| | | | |
 |`cufftXtClearCallback`| | | | |`hipfftXtClearCallback`|4.3.0| | | | |
-|`cufftXtExec`|8.0| | | | | | | | | |
-|`cufftXtExecDescriptor`|8.0| | | | | | | | | |
-|`cufftXtExecDescriptorC2C`| | | | | | | | | | |
-|`cufftXtExecDescriptorC2R`| | | | | | | | | | |
-|`cufftXtExecDescriptorD2Z`| | | | | | | | | | |
-|`cufftXtExecDescriptorR2C`| | | | | | | | | | |
-|`cufftXtExecDescriptorZ2D`| | | | | | | | | | |
-|`cufftXtExecDescriptorZ2Z`| | | | | | | | | | |
-|`cufftXtFree`| | | | | | | | | | |
-|`cufftXtGetSizeMany`|8.0| | | | | | | | | |
-|`cufftXtMakePlanMany`|8.0| | | | | | | | | |
-|`cufftXtMalloc`| | | | | | | | | | |
-|`cufftXtMemcpy`| | | | | | | | | | |
+|`cufftXtExec`|8.0| | | |`hipfftXtExec`|5.6.0| | | | |
+|`cufftXtExecDescriptor`|8.0| | | |`hipfftXtExecDescriptor`|6.0.0| | | | |
+|`cufftXtExecDescriptorC2C`| | | | |`hipfftXtExecDescriptorC2C`|6.0.0| | | | |
+|`cufftXtExecDescriptorC2R`| | | | |`hipfftXtExecDescriptorC2R`|6.0.0| | | | |
+|`cufftXtExecDescriptorD2Z`| | | | |`hipfftXtExecDescriptorD2Z`|6.0.0| | | | |
+|`cufftXtExecDescriptorR2C`| | | | |`hipfftXtExecDescriptorR2C`|6.0.0| | | | |
+|`cufftXtExecDescriptorZ2D`| | | | |`hipfftXtExecDescriptorZ2D`|6.0.0| | | | |
+|`cufftXtExecDescriptorZ2Z`| | | | |`hipfftXtExecDescriptorZ2Z`|6.0.0| | | | |
+|`cufftXtFree`| | | | |`hipfftXtFree`|6.0.0| | | | |
+|`cufftXtGetSizeMany`|8.0| | | |`hipfftXtGetSizeMany`|5.6.0| | | | |
+|`cufftXtMakePlanMany`|8.0| | | |`hipfftXtMakePlanMany`|5.6.0| | | | |
+|`cufftXtMalloc`| | | | |`hipfftXtMalloc`|6.0.0| | | | |
+|`cufftXtMemcpy`| | | | |`hipfftXtMemcpy`|6.0.0| | | | |
 |`cufftXtQueryPlan`| | | | | | | | | | |
 |`cufftXtSetCallback`| | | | |`hipfftXtSetCallback`|4.3.0| | | | |
 |`cufftXtSetCallbackSharedSize`| | | | |`hipfftXtSetCallbackSharedSize`|4.3.0| | | | |
 |`cufftXtSetDistribution`|11.8| | | | | | | | | |
-|`cufftXtSetGPUs`| | | | | | | | | | |
+|`cufftXtSetGPUs`| | | | |`hipfftXtSetGPUs`|6.0.0| | | | |
 |`cufftXtSetWorkArea`| | | | | | | | | | |
 |`cufftXtSetWorkAreaPolicy`|9.2| | | | | | | | | |
 

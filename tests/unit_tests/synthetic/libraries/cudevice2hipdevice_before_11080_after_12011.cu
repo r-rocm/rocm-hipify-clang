@@ -11,16 +11,8 @@
 int main() {
   printf("24.before_11080_after_12011, CUDA Device API to HIP Device API synthetic test\n");
 
-  double da = 0.0f;
-  double dx = 0.0f;
-  float fa = 0.0f;
-  float fx = 0.0f;
   short int shi = 0;
   unsigned short int ushi = 0;
-  double2 d2 = { 0.0f, 0.0f };
-  float2 f2 = { 0.0f, 0.0f };
-  __half_raw hrx = { 0 };
-  __half2_raw h2rx = { 0, 0 };
 
 #if CUDA_VERSION >= 11000
   // CHECK: __hip_bfloat16 bf16 = { 0 };

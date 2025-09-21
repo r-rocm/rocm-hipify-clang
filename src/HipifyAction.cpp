@@ -234,8 +234,6 @@ const std::string sCusparseSpMV_bufferSize = "cusparseSpMV_bufferSize";
 const std::string sCusparseSpMM_preprocess = "cusparseSpMM_preprocess";
 const std::string sCusparseSpSV_bufferSize = "cusparseSpSV_bufferSize";
 const std::string sCudaGetDriverEntryPoint = "cudaGetDriverEntryPoint";
-const std::string sNvrtcCompileProgram = "nvrtcCompileProgram";
-const std::string sNvrtcCreateProgram = "nvrtcCreateProgram";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -295,25 +293,6 @@ std::map<std::string, hipify::FuncOverloadsStruct> FuncOverloads {
 };
 
 std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
-  {sNvrtcCompileProgram,
-    {
-      {
-        {
-          {2, {e_const_cast_char_pp, cw_None}}
-        }
-      }
-    }
-  },
-  {sNvrtcCreateProgram,
-    {
-      {
-        {
-          {4, {e_const_cast_char_pp, cw_None}},
-          {5, {e_const_cast_char_pp, cw_None}}
-        }
-      }
-    }
-  },
   {sCudaGetDriverEntryPoint,
     {
       {
@@ -2244,6 +2223,8 @@ void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
     StringRef name = s.slice(begin, end);
     const auto found = CUDA_RENAMES_MAP().find(name);
     if (found != CUDA_RENAMES_MAP().end()) {
+      if (!HipDnnSupport && found->second.apiType == API_DNN && !Statistics::isToMIOpen(found->second))
+        return;
       StringRef repName = Statistics::isToRoc(found->second) ? found->second.rocName : found->second.hipName;
       hipCounter counter = {s_string_literal, "", ConvTypes::CONV_LITERAL, ApiTypes::API_RUNTIME, found->second.supportDegree};
       Statistics::current().incrementCounter(counter, name.str());
@@ -2310,6 +2291,8 @@ void HipifyAction::FindAndReplace(StringRef name,
     // So it's an identifier, but not CUDA? Boring.
     return;
   }
+  if (!HipDnnSupport && found->second.apiType == API_DNN && !Statistics::isToMIOpen(found->second))
+    return;
   Statistics::current().incrementCounter(found->second, name.str());
   clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
   // Warn about the deprecated identifier in CUDA but hipify it.
@@ -2513,6 +2496,8 @@ void HipifyAction::InclusionDirective(clang::SourceLocation hash_loc,
   bool exclude = Exclude(found->second);
   Statistics::current().incrementCounter(found->second, file_name.str());
   clang::SourceLocation sl = filename_range.getBegin();
+  if (!HipDnnSupport && found->second.apiType == API_DNN && !Statistics::isToMIOpen(found->second))
+    return;
   if (Statistics::isUnsupported(found->second)) {
     clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
     std::string sWarn;
@@ -2648,14 +2633,11 @@ bool HipifyAction::cubNamespacePrefix(const mat::MatchFinder::MatchResult &Resul
     if (!t) return false;
     const clang::ElaboratedType *et = t->getAs<clang::ElaboratedType>();
     if (!et) return false;
-    const clang::NestedNameSpecifier *nns = et->getQualifier();
-    if (!nns) return false;
-    const clang::NamespaceDecl *nsd = nns->getAsNamespace();
-    if (!nsd) return false;
+    std::string name = llcompat::getNamespaceDeclName(et->getQualifier());
+    if (name.empty()) return false;
     const clang::TypeSourceInfo *si = decl->getTypeSourceInfo();
     const clang::TypeLoc tloc = si->getTypeLoc();
     const clang::SourceRange sr = tloc.getSourceRange();
-    std::string name = nsd->getDeclName().getAsString();
     FindAndReplace(name, GetSubstrLocation(name, sr), CUDA_CUB_NAMESPACE_MAP);
     return true;
   }
@@ -2684,12 +2666,9 @@ bool HipifyAction::cubFunctionTemplateDecl(const mat::MatchFinder::MatchResult &
       if (!t) continue;
       const clang::ElaboratedType *et = t->getAs<clang::ElaboratedType>();
       if (!et) continue;
-      const clang::NestedNameSpecifier *nns = et->getQualifier();
-      if (!nns) continue;
-      const clang::NamespaceDecl *nsd = nns->getAsNamespace();
-      if (!nsd) continue;
+      std::string name = llcompat::getNamespaceDeclName(et->getQualifier());
+      if (name.empty()) return false;
       const clang::SourceRange sr = valueDecl->getSourceRange();
-      std::string name = nsd->getDeclName().getAsString();
       FindAndReplace(name, GetSubstrLocation(name, sr), CUDA_CUB_NAMESPACE_MAP);
       ret = true;
     }
@@ -3135,9 +3114,7 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseSpMV_bufferSize,
             sCusparseSpMM_preprocess,
             sCusparseSpSV_bufferSize,
-            sCudaGetDriverEntryPoint,
-            sNvrtcCompileProgram,
-            sNvrtcCreateProgram
+            sCudaGetDriverEntryPoint
           )
         )
       )
@@ -3349,6 +3326,5 @@ void HipifyAction::run(const mat::MatchFinder::MatchResult &Result) {
   if (cubNamespacePrefix(Result)) return;
   if (cubFunctionTemplateDecl(Result)) return;
   if (cubUsingNamespaceDecl(Result)) return;
-  if (UseHipDataType && dataTypeSelection(Result)) return;
   if (!NoUndocumented && half2Member(Result)) return;
 }

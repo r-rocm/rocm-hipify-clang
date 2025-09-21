@@ -1,3 +1,9 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="NVIDIA CUDA APIs supported by HIPIFY">
+    <meta name="keywords" content="HIPIFY, HIP, ROCm, NVIDIA, CUDA, CUDA2HIP, hipification, hipify-clang, hipify-perl, BLAS, cuBLAS, rocBLAS">
+</head>
+
 # CUBLAS API supported by ROC
 
 
@@ -13,6 +19,7 @@
 |`CUBLAS_COMPUTE_16F`|11.0| | | | | | | | | |
 |`CUBLAS_COMPUTE_16F_PEDANTIC`|11.0| | | | | | | | | |
 |`CUBLAS_COMPUTE_32F`|11.0| | | |`rocblas_compute_type_f32`|5.7.0| | | | |
+|`CUBLAS_COMPUTE_32F_EMULATED_16BFX9`|12.9| | | | | | | | | |
 |`CUBLAS_COMPUTE_32F_FAST_16BF`|11.0| | | | | | | | | |
 |`CUBLAS_COMPUTE_32F_FAST_16F`|11.0| | | | | | | | | |
 |`CUBLAS_COMPUTE_32F_FAST_TF32`|11.0| | | | | | | | | |
@@ -24,9 +31,13 @@
 |`CUBLAS_DEFAULT_MATH`|9.0| | | |`rocblas_default_math`|5.7.0| | | | |
 |`CUBLAS_DIAG_NON_UNIT`| | | | |`rocblas_diagonal_non_unit`|1.5.0| | | | |
 |`CUBLAS_DIAG_UNIT`| | | | |`rocblas_diagonal_unit`|1.5.0| | | | |
+|`CUBLAS_EMULATION_STRATEGY_DEFAULT`|12.9| | | | | | | | | |
+|`CUBLAS_EMULATION_STRATEGY_EAGER`|12.9| | | | | | | | | |
+|`CUBLAS_EMULATION_STRATEGY_PERFORMANT`|12.9| | | | | | | | | |
 |`CUBLAS_FILL_MODE_FULL`|10.1| | | |`rocblas_fill_full`|1.5.0| | | | |
 |`CUBLAS_FILL_MODE_LOWER`| | | | |`rocblas_fill_lower`|1.5.0| | | | |
 |`CUBLAS_FILL_MODE_UPPER`| | | | |`rocblas_fill_upper`|1.5.0| | | | |
+|`CUBLAS_FP32_EMULATED_BF16X9_MATH`|12.9| | | | | | | | | |
 |`CUBLAS_GEMM_ALGO0`|8.0| | | | | | | | | |
 |`CUBLAS_GEMM_ALGO0_TENSOR_OP`|9.0| | | | | | | | | |
 |`CUBLAS_GEMM_ALGO1`|8.0| | | | | | | | | |
@@ -98,6 +109,7 @@
 |`cublasComputeType_t`|11.0| | | |`rocblas_computetype`|5.7.0| | | | |
 |`cublasContext`| | | | |`_rocblas_handle`|1.5.0| | | | |
 |`cublasDiagType_t`| | | | |`rocblas_diagonal`|1.5.0| | | | |
+|`cublasEmulationStrategy_t`|12.9| | | | | | | | | |
 |`cublasFillMode_t`| | | | |`rocblas_fill`|1.5.0| | | | |
 |`cublasGemmAlgo_t`|8.0| | | |`rocblas_gemm_algo`|1.8.2| | | | |
 |`cublasHandle_t`| | | | |`rocblas_handle`|1.5.0| | | | |
@@ -133,13 +145,18 @@
 |`CUDA_R_32F`|8.0| | | |`rocblas_datatype_f32_r`|1.8.2| | | | |
 |`CUDA_R_32I`|8.0| | | |`rocblas_datatype_i32_r`|2.0.0| | | | |
 |`CUDA_R_32U`|8.0| | | |`rocblas_datatype_u32_r`|2.0.0| | | | |
+|`CUDA_R_4F_E2M1`|12.8| | | | | | | | | |
 |`CUDA_R_4I`|11.0| | | | | | | | | |
 |`CUDA_R_4U`|11.0| | | | | | | | | |
 |`CUDA_R_64F`|8.0| | | |`rocblas_datatype_f64_r`|1.8.2| | | | |
 |`CUDA_R_64I`|11.0| | | | | | | | | |
 |`CUDA_R_64U`|11.0| | | | | | | | | |
+|`CUDA_R_6F_E2M3`|12.8| | | | | | | | | |
+|`CUDA_R_6F_E3M2`|12.8| | | | | | | | | |
 |`CUDA_R_8F_E4M3`|11.8| | | | | | | | | |
 |`CUDA_R_8F_E5M2`|11.8| | | | | | | | | |
+|`CUDA_R_8F_UE4M3`|12.8| | | | | | | | | |
+|`CUDA_R_8F_UE8M0`|12.8| | | | | | | | | |
 |`CUDA_R_8I`|8.0| | | |`rocblas_datatype_i8_r`|2.0.0| | | | |
 |`CUDA_R_8U`|8.0| | | |`rocblas_datatype_u8_r`|2.0.0| | | | |
 |`cublasDataType_t`|7.5| | | |`rocblas_datatype`|1.8.2| | | | |
@@ -155,6 +172,7 @@
 |`CUBLASLT_ALGO_CAP_CUSTOM_MEMORY_ORDER`|10.1| | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_CUSTOM_OPTION_MAX`|10.1| | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_EPILOGUE_MASK`|10.1| | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_FLOATING_POINT_EMULATION_SUPPORT`|12.9| | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_LD_NEGATIVE`|11.0| | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_A_BYTES`|11.0| | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_B_BYTES`|11.0| | | | | | | | | |
@@ -162,6 +180,7 @@
 |`CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_D_BYTES`|11.0| | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_NUMERICAL_IMPL_FLAGS`|11.0| | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_OUT_OF_PLACE_RESULT_SUPPORT`|10.1| | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_POINTER_ARRAY_BATCH_SUPPORT`|12.9| | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_POINTER_MODE_MASK`|10.1| | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_REDUCTION_SCHEME_MASK`|10.1| | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_SPLITK_SUPPORT`|10.1| | | | | | | | | |
@@ -178,6 +197,8 @@
 |`CUBLASLT_ALGO_CONFIG_SPLITK_NUM`|10.1| | | | | | | | | |
 |`CUBLASLT_ALGO_CONFIG_STAGES_ID`|11.0| | | | | | | | | |
 |`CUBLASLT_ALGO_CONFIG_TILE_ID`|10.1| | | | | | | | | |
+|`CUBLASLT_BATCH_MODE_POINTER_ARRAY`|12.9| | | | | | | | | |
+|`CUBLASLT_BATCH_MODE_STRIDED`|12.9| | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_10x1x1`|11.8| | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_11x1x1`|11.8| | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_12x1x1`|11.8| | | | | | | | | |
@@ -249,16 +270,22 @@
 |`CUBLASLT_MATMUL_DESC_ALPHA_VECTOR_BATCH_STRIDE`|11.4| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_AMAX_D_POINTER`|11.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER`|12.2| | | | | | | | | |
-|`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS`|12.2| | | | | | | | | |
-|`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_ROWS`|12.2| | | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS`|12.2|12.8| | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_ROWS`|12.2|12.8| | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_OUT_COUNTERS_POINTER`|12.2| | | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_A_SCALE_MODE`|12.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_A_SCALE_POINTER`|11.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_BIAS_BATCH_STRIDE`|11.3| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_BIAS_DATA_TYPE`|11.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_BIAS_POINTER`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_B_SCALE_MODE`|12.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_B_SCALE_POINTER`|11.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_COMPUTE_TYPE`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_C_SCALE_MODE`|12.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_C_SCALE_POINTER`|11.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_D_OUT_SCALE_MODE`|12.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_D_OUT_SCALE_POINTER`|12.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_D_SCALE_MODE`|12.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_D_SCALE_POINTER`|11.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_EPILOGUE`|10.1| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_EPILOGUE_AUX_AMAX_POINTER`|11.8| | | | | | | | | |
@@ -266,6 +293,7 @@
 |`CUBLASLT_MATMUL_DESC_EPILOGUE_AUX_DATA_TYPE`|11.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_EPILOGUE_AUX_LD`|11.3| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_EPILOGUE_AUX_POINTER`|11.3| | | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_EPILOGUE_AUX_SCALE_MODE`|12.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_EPILOGUE_AUX_SCALE_POINTER`|11.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_FAST_ACCUM`|11.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_FILL_MODE`|10.1| | | | | | | | | |
@@ -281,6 +309,13 @@
 |`CUBLASLT_MATMUL_INNER_SHAPE_MMA1688`|11.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_INNER_SHAPE_MMA884`|11.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_INNER_SHAPE_UNDEFINED`|11.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F`|12.9| | | | | | | | | |
+|`CUBLASLT_MATMUL_MATRIX_SCALE_END`|12.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F`|12.9| | | | | | | | | |
+|`CUBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F`|12.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F`|12.9| | | | | | | | | |
+|`CUBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3`|12.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_MATRIX_SCALE_VEC32_UE8M0`|12.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_PREF_IMPL_MASK`|11.0| | | | | | | | | |
 |`CUBLASLT_MATMUL_PREF_MAX_WAVES_COUNT`|10.1| | | | | | | | | |
 |`CUBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES`|10.1| | | | | | | | | |
@@ -305,6 +340,7 @@
 |`CUBLASLT_MATMUL_STAGES_16x5`|11.0| | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_16x6`|11.0| | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_16xAUTO`|11.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_256xAUTO`|12.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_32x1`|11.0| | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_32x10`|11.0| | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_32x2`|11.0| | | | | | | | | |
@@ -530,6 +566,7 @@
 |`CUBLASLT_MATMUL_TILE_24x640`|12.6| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_24x704`|12.6| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_24x768`|12.6| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_256x1024`|12.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_256x104`|12.6| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_256x112`|12.6| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_256x120`|12.6| | | | | | | | | |
@@ -555,6 +592,7 @@
 |`CUBLASLT_MATMUL_TILE_256x32`|12.1| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_256x40`|12.6| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_256x48`|12.6| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_256x512`|12.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_256x56`|12.6| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_256x64`|10.1| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_256x72`|12.6| | | | | | | | | |
@@ -707,6 +745,7 @@
 |`CUBLASLT_MATMUL_TILE_48x768`|12.6| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_496x64`|12.6| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_504x64`|12.6| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_512x1024`|12.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_512x104`|12.6| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_512x112`|12.6| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_512x120`|12.6| | | | | | | | | |
@@ -716,6 +755,7 @@
 |`CUBLASLT_MATMUL_TILE_512x32`|12.6| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_512x40`|12.6| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_512x48`|12.6| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_512x512`|12.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_512x56`|12.6| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_512x64`|10.1| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_512x72`|12.6| | | | | | | | | |
@@ -958,6 +998,7 @@
 |`CUBLASLT_MATMUL_TILE_END`|10.1| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_UNDEFINED`|10.1| | | | | | | | | |
 |`CUBLASLT_MATRIX_LAYOUT_BATCH_COUNT`|10.1| | | | | | | | | |
+|`CUBLASLT_MATRIX_LAYOUT_BATCH_MODE`|12.9| | | | | | | | | |
 |`CUBLASLT_MATRIX_LAYOUT_COLS`|10.1| | | | | | | | | |
 |`CUBLASLT_MATRIX_LAYOUT_LD`|10.1| | | | | | | | | |
 |`CUBLASLT_MATRIX_LAYOUT_ORDER`|10.1| | | | | | | | | |
@@ -1020,6 +1061,7 @@
 |`CUBLASLT_SEARCH_RESERVED_07`|12.6| | | | | | | | | |
 |`CUBLASLT_SEARCH_RESERVED_08`|12.6| | | | | | | | | |
 |`CUBLASLT_SEARCH_RESERVED_09`|12.6| | | | | | | | | |
+|`cublasLtBatchMode_t`|12.9| | | | | | | | | |
 |`cublasLtClusterShape_t`|11.8| | | | | | | | | |
 |`cublasLtContext`|10.1| | | | | | | | | |
 |`cublasLtEpilogue_t`|10.1| | | | | | | | | |
@@ -1033,6 +1075,7 @@
 |`cublasLtMatmulDesc_t`|10.1| | | | | | | | | |
 |`cublasLtMatmulHeuristicResult_t`|10.1| | | | | | | | | |
 |`cublasLtMatmulInnerShape_t`|11.8| | | | | | | | | |
+|`cublasLtMatmulMatrixScale_t`|12.8| | | | | | | | | |
 |`cublasLtMatmulPreferenceAttributes_t`|10.1| | | | | | | | | |
 |`cublasLtMatmulPreferenceOpaque_t`|11.0| | | | | | | | | |
 |`cublasLtMatmulPreference_t`|10.1| | | | | | | | | |
@@ -1064,6 +1107,7 @@
 |`cublasFree`| | | | | | | | | | |
 |`cublasGetAtomicsMode`| | | | |`rocblas_get_atomics_mode`|3.8.0| | | | |
 |`cublasGetCudartVersion`|10.1| | | | | | | | | |
+|`cublasGetEmulationStrategy`|12.9| | | | | | | | | |
 |`cublasGetError`| | | | | | | | | | |
 |`cublasGetLoggerCallback`|9.2| | | | | | | | | |
 |`cublasGetMathMode`|9.0| | | |`rocblas_get_math_mode`|5.7.0| | | | |
@@ -1090,6 +1134,7 @@
 |`cublasLoggerConfigure`|9.2| | | | | | | | | |
 |`cublasMigrateComputeType`|11.0| | | | | | | | | |
 |`cublasSetAtomicsMode`| | | | |`rocblas_set_atomics_mode`|3.8.0| | | | |
+|`cublasSetEmulationStrategy`|12.9| | | | | | | | | |
 |`cublasSetKernelStream`| | | | | | | | | | |
 |`cublasSetLoggerCallback`|9.2| | | | | | | | | |
 |`cublasSetMathMode`|9.0| | | |`rocblas_set_math_mode`|5.7.0| | | | |

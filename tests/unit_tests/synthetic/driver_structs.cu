@@ -318,6 +318,18 @@ int main() {
   CUDA_BATCH_MEM_OP_NODE_PARAMS_st BATCH_MEM_OP_NODE_PARAMS_st;
 #endif
 
+#if CUDA_VERSION >= 11080
+  // CHECK: HIP_LAUNCH_CONFIG_st LaunchConfig_st;
+  // CHECK-NEXT: HIP_LAUNCH_CONFIG launchConfig;
+  CUlaunchConfig_st LaunchConfig_st;
+  CUlaunchConfig launchConfig;
+
+  // CHECK: hipLaunchAttribute_st LaunchAttribute_st;
+  // CHECK-NEXT: hipLaunchAttribute LaunchAttribute;
+  CUlaunchAttribute_st LaunchAttribute_st;
+  CUlaunchAttribute LaunchAttribute;
+#endif
+
 #if CUDA_VERSION >= 12000
   // CHECK: hipGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS_st;
   // CHECK-NEXT: hipGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS;

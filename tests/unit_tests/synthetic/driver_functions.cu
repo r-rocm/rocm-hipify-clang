@@ -36,6 +36,8 @@ int main() {
   size_t bytes_2 = 0;
   void *image = nullptr;
   void *pfn = nullptr;
+  void *paramsprt = nullptr;
+  void *extraparamsprt = nullptr;
   std::string name = "str";
   std::string symbol = "symbol";
   uint32_t u_value = 0;
@@ -204,7 +206,7 @@ int main() {
 
   unsigned int version = 0;
   // CUDA: CUresult CUDAAPI cuCtxGetApiVersion(CUcontext ctx, unsigned int *version);
-  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxGetApiVersion(hipCtx_t ctx, int* apiVersion);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxGetApiVersion(hipCtx_t ctx, unsigned int* apiVersion);
   // CHECK: result = hipCtxGetApiVersion(context, &version);
   result = cuCtxGetApiVersion(context, &version);
 
@@ -1124,7 +1126,7 @@ int main() {
   // CHECK-NEXT: hipGraphNode_t graphNode, graphNode2;
   // CHECK-NEXT: const hipGraphNode_t *pGraphNode = nullptr;
   // CHECK-NEXT: hipKernelNodeParams KERNEL_NODE_PARAMS;
-  // CHECK-NEXT: HIP_MEMSET_NODE_PARAMS MEMSET_NODE_PARAMS;
+  // CHECK-NEXT: hipMemsetParams MEMSET_NODE_PARAMS;
   // CHECK-NEXT: hipGraphExec_t graphExec;
   // CHECK-NEXT: hipExternalMemory_t externalMemory;
   // CHECK-NEXT: hipExternalSemaphore_t externalSemaphore;
@@ -1357,7 +1359,7 @@ int main() {
   result = cuGraphAddMemcpyNode(&graphNode, graph, &graphNode2, bytes, &MEMCPY3D, context);
 
   // CUDA: CUresult CUDAAPI cuGraphAddMemsetNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, const CUDA_MEMSET_NODE_PARAMS *memsetParams, CUcontext ctx);
-  // HIP: hipError_t hipDrvGraphAddMemsetNode(hipGraphNode_t* phGraphNode, hipGraph_t hGraph, const hipGraphNode_t* dependencies, size_t numDependencies, const HIP_MEMSET_NODE_PARAMS* memsetParams, hipCtx_t ctx);
+  // HIP: hipError_t hipDrvGraphAddMemsetNode(hipGraphNode_t* phGraphNode, hipGraph_t hGraph, const hipGraphNode_t* dependencies, size_t numDependencies, const hipMemsetParams* memsetParams, hipCtx_t ctx);
   // CHECK: result = hipDrvGraphAddMemsetNode(&graphNode, graph, &graphNode2, bytes, &MEMSET_NODE_PARAMS, context);
   result = cuGraphAddMemsetNode(&graphNode, graph, &graphNode2, bytes, &MEMSET_NODE_PARAMS, context);
 #endif
@@ -1489,7 +1491,7 @@ int main() {
   result = cuGraphExecMemcpyNodeSetParams(graphExec, graphNode, &MEMCPY3D, context);
 
   // CUDA: CUresult CUDAAPI cuGraphExecMemsetNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_MEMSET_NODE_PARAMS *memsetParams, CUcontext ctx);
-  // HIP: hipError_t hipDrvGraphExecMemsetNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, const HIP_MEMSET_NODE_PARAMS* memsetParams, hipCtx_t ctx);
+  // HIP: hipError_t hipDrvGraphExecMemsetNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, const hipMemsetParams* memsetParams, hipCtx_t ctx);
   // CHECK: result = hipDrvGraphExecMemsetNodeSetParams(graphExec, graphNode, &MEMSET_NODE_PARAMS, context);
   result = cuGraphExecMemsetNodeSetParams(graphExec, graphNode, &MEMSET_NODE_PARAMS, context);
 #endif
@@ -1918,6 +1920,26 @@ int main() {
   // HIP: hipError_t hipGraphExecBatchMemOpNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, const hipBatchMemOpNodeParams* nodeParams);
   // CHECK: result = hipGraphExecBatchMemOpNodeSetParams(graphExec, graphNode, &BATCH_MEM_OP_NODE_PARAMS);
   result = cuGraphExecBatchMemOpNodeSetParams(graphExec, graphNode, &BATCH_MEM_OP_NODE_PARAMS);
+
+  // CHECK: hipMemRangeHandleType MemRangeHandleType;
+  CUmemRangeHandleType MemRangeHandleType;
+
+  // CUDA: CUresult CUDAAPI cuMemGetHandleForAddressRange(void *handle, CUdeviceptr dptr, size_t size, CUmemRangeHandleType handleType, unsigned long long flags);
+  // HIP:  hipError_t hipMemGetHandleForAddressRange(void* handle, hipDeviceptr_t dptr, size_t size, hipMemRangeHandleType handleType, unsigned long long flags);
+  // CHECK: result = hipMemGetHandleForAddressRange(image, deviceptr, bytes, MemRangeHandleType, ull_2);
+  result = cuMemGetHandleForAddressRange(image, deviceptr, bytes, MemRangeHandleType, ull_2);
+#endif
+
+#if CUDA_VERSION >= 11080
+  // CHECK: HIP_LAUNCH_CONFIG_st LaunchConfig_st;
+  // CHECK-NEXT: HIP_LAUNCH_CONFIG launchConfig;
+  CUlaunchConfig_st LaunchConfig_st;
+  CUlaunchConfig launchConfig;
+
+  // CUDA: CUresult CUDAAPI cuLaunchKernelEx(const CUlaunchConfig *config, CUfunction f, void** kernelParams, void** extra);
+  // HIP: hipError_t hipDrvLaunchKernelEx(const HIP_LAUNCH_CONFIG* config, hipFunction_t f, void** params, void** extra);
+  // CHECK: result = hipDrvLaunchKernelEx(&launchConfig, function, &paramsprt, &extraparamsprt);
+  result = cuLaunchKernelEx(&launchConfig, function, &paramsprt, &extraparamsprt);
 #endif
 
 #if CUDA_VERSION >= 12000
